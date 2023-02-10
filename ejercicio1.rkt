@@ -1,6 +1,7 @@
 #lang racket/base
 
-;; Ejerciocio #1 Jose Felipe Duarte Coronado Codigo:1003661696
+;; Ejerciocio #1 Jose Felipe Duarte Coronado Codigo:1003661694
+;# Cualquier comentario estare atento.
 
 ;; 1- Funcion multiplicación
 ;(* x y z ...) → number
@@ -158,10 +159,16 @@
 ; 18-Funcion coseno
 ; (cos x) → number
 ;   x : number
+; (cos (/ pi 4)) #i0.7071067811865476
+; (cos (/ pi 2))#6.123233995736766e-17
+; (cos pi)#i-1.0
 
 ;19-Funcion hiperbolica de coseno
 ; (cosh x) → number
 ;   x : number
+(* (sin (/ pi 4)) (cosh 1)) ;i1.0911227807955013
+(+ (cosh 1) (sqrt 9)) ;i4.543080634815244
+(* (cosh 0) (sin (/ pi 4))) ;i0.7071067811865475
 
 ;20-Determina el tiempo actual en segundos transcurridos (desde una fecha de inicio específica de la plataforma)
 (current-seconds) ;1675979132
@@ -170,91 +177,165 @@
 ;21- funcion que determina el denomidado de un racional
 ; (denominator x) → integer
 ;   x : rational?
+(* (denominator (/ 3 5)) (floor pi)) ;i15.0
+(* (denominator (/ 4 7)) (cosh 0)) ;i7.0
+(+ (log (expt 2.71828 2)) (denominator (/ 9 11))) ; 12.999998654694565
 
 ;22- da el numero e
 ;e : real
+(* (expt e pi) (tan 0)) ;0
+(+ (sqrt e) (log (expt e 2))) ;i3.648721270700128
+(* (expt e -1) (sinh 0)) ;0
 
 ; 23- funcion que determina si el numero es par 
 ;(even? x) → boolean?
  ; x : integer
+(even? (+ 3 4)) ;#false
+(even? (* 2 7)) ;#true
+(even? (- 6 8)) ; #true
 
  ;24- funcion que convierte un numero exacto a uno inexacto
 ;  (exact->inexact x) → number
 ;   x : number
+(exact->inexact (+ pi 2)) ;5.141592653589793
+(exact->inexact (* e 4)) ;10.87312731383618
+(exact->inexact (log 8)) ;2.0794415416798357
 
 ;25 Funcion que determina si un numero es exacto
 ;(exact? x) → boolean?
 ;x : number
+(exact? (+ 3 (/ 1 2))) ;#true
+(exact? (expt 2 10)) ;#true
+(exact? (cos pi));#false
 
 ;26 -Funcion que determina e elevado a un numero
 ;(exp x) → number
 ;  x : number
+(exp 3) ;20.085536923187668
+(+ (exp 2) (cos 1)) ;7.929358404798791
+(log (exp 3)) ;3.0
+
 
 ; 27- funcion que calcule exponenciales
 ;(expt x y) → number
 ;   x : number
 ;   y : number
+(expt 2 3) ;8
+(* (expt 3 4) (cos 5)) ;i22.976637022521327
+(+ (* (expt 2 3) (cos 1)) (log (exp 3))) ;7.322418446945118
+
 
 ;28 -funcion piso, redondea el numero al entero mas pequeño
 ; (floor x) → integer
 ;   x : real
+(floor 3.14) ;3
+(+ (floor 3.14) (sqrt 16)) ;7
+(* (+ (floor 3.14) (sqrt 16)) (sin 1)) ;5.890296893655275
+
 
 ;29 -Funcion que calcule el maximo comun divisior 
 ; (gcd x y ...) → integer
 ;   x : integer
 ;   y : integer
+(+ (* (gcd 10 15) (floor (/ 7 2))) (quotient 34 7)) ;19
+(* (expt (gcd 30 40) 3) (modulo 13 4)) ;1000
+(/ (- (gcd 5 20) (expt 2 4)) (abs (- (gcd 10 5) 9))) ;-2.75
 
 ;30 -Funcion que extrae la parte imaginaria de un numero
 ; (imag-part x) → real
 ;   x : number
+(* (imag-part (+ 1.0 2)) (gcd 8 9)) ;0
+(- (imag-part (- 3.5 4)) (quotient 19 5)) ;-3
+(+ (expt (imag-part (* 2.0 3)) 3) (floor (/ 17 2))) ;8
 
 ;31 -Funcion que aproxima un numero inexacto a uno exacto
 ; (inexact->exact x) → number
 ;   x : number
+(+ (inexact->exact 1.5) (inexact->exact 2.3));; Resultado: 3.8
+(* (inexact->exact 3.14) (inexact->exact 4.0));; Resultado: 12.56
+(/ (inexact->exact 8.0) (inexact->exact 2.0));; Resultado: 4.0
+
 
 ;32 -Funcion que determina si un número es inexacto.
 ; (inexact? x) → boolean?
 ;   x : number
+(inexact? (/ 3 2)) ;#t ; El resultado es #t porque el resultado de la división es un número inexacto.
+(inexact? (sin (* pi 3)) );#t ; El resultado es #t porque el resultado de la función seno es un número inexacto.
+(inexact? (log 10) ) ;#t ; El resultado es #t porque el resultado de la función logaritmo es un número inexacto.
+
 
 ;33 -Funcion que busca el caracter correspondiente al numero entero exacto dado en la tabla ASCII
 ; (integer->char x) → char
 ;   x : exact-integer?
 
+(integer->char (+ 96 97)) ;#\Á
+(integer->char (- 65 1)) ;#\@
+ (integer->char (* 48 2)) ;#\`
+
 ;34 -Funcion que calcula la raiz cuadrada y la aproxima al entero o entera-imaginaria de un entero
 ; (integer-sqrt x) → complex
 ;   x : integer
+(+ (integer-sqrt 4) (* 2 (integer-sqrt 9))) ;8
+(/ (integer-sqrt 144) (integer-sqrt 49)) ;1.714285
+(/ (+ (integer-sqrt 4) (integer-sqrt 9)) (integer-sqrt 144)) ;0.416
+
 
 ;35 -Funcion que determina si hay un numero entero 
 ; (integer? x) → boolean?
 ;   x : any/c
+ (integer? 7) ; Imprime #t
+ (integer? 7.0) ; Imprime #f
+  (integer? "7") ; Imprime #f
+
 
 ;36 -Formula que determina el mínimo común múltiplo de dos enteros (exacto o inexacto).
 ; (lcm x y ...) → integer
 ;   x : integer
 ;   y : integer
+(+ (* (lcm 4 7) (expt 2 3)) (floor (/ pi 2))) ;225.0
+(* (lcm (abs (- 14 3)) (abs (- 17 20))) (sin (* pi (/ 1 2)))) ;33.0
+(/ (lcm (abs (modulo 11 7)) (abs (modulo 9 4))) (expt (cos pi) 2)) ;4.0
+
 
 ;37 -Funcion que calcula el logaritmo en base e
 ; (log x) → number
 ;   x : number
+(+ (log (sin (* pi (expt (cos pi) 2)))) (log (sin (* pi (expt (sin pi) 2)))) (log (tan pi))) ;-145.41020524496506+3.141592653589793i
+(+ (log (exp (sin (* pi (expt (cos pi) 2))))) (log (exp (sin (* pi (expt (sin pi) 2))))) (log (exp (tan pi)))) ; 1.1102230246251563e-16
+(- (log (sin (* pi (expt (cos pi) 2)))) (log (sin (* pi (expt (sin pi) 2)))) (log (tan pi))) ;72.13272116622807-3.141592653589793i
 
 ;38 - Funcion que determina la magnitud de un numero complejo 
 ;(magnitude x) → real
  ; x : number
+(+ (magnitude (* 2 (sin pi))) (magnitude (- pi (expt 2 2)))) ;0.8584073464102071
+(magnitude (+ (sqrt 3) (sqrt (- 2)))) ;2.23606797749979
+(* (magnitude pi) (magnitude (- (expt 3 2) (sqrt 5)))) ;21.24951915126741
 
 ;39 - Funcion que crea un complejo a partir de una magnitud y un ángulo.
 ;  (make-polar x y) → number
 ;   x : real
 ;   y : real
 
+(sin (make-polar 1 pi)) ; -0.8414709848078965+6.616576367510055e-17i
+(cos (make-polar 1 0)) ;0.5403023058681398
+(sqrt (+ (expt (make-polar 1 pi) 2) (expt (make-polar 1 pi) 2))) ;1.4142135623730951-1.7318549141438708e-16i
+
+
 ;40 -Funcion crea un complejo a partir de una parte real y otra imaginaria.
 ;(make-rectangular x y) → number
  ; x : real
  ; y : real
+ (make-rectangular (* 2 (sin pi)) (* 2 (cos pi))) ;  #i2.4492127076447545e-16-2.0i
+(make-rectangular (* 4 (sin pi)) (* 4 (cos pi))) ;  #i4.898425415289509e-16-4.0i
+(make-rectangular (* 3 (sin pi)) (* 3 (cos pi))) ;  #i3.673819061467132e-16-3.0i
 
  ;41 -Funcion que determina el numero mas grande
 ;  (max x y ...) → real
 ;   x : real
 ;   y : real
+(+ (max 3 4 5) (sqrt 36));11
+(- (max 10 20 -30) (* 4 (sin pi))) ;20.0
+(* (max 2 -3 5) (expt 2 5)) ;160
 
 ;42 - Funcion que determina el numero mas pequeño
 ; (min x y ...) → real
@@ -282,5 +363,29 @@
 ;47 -Funcion que determina si cualquier valor es un numero
 ;(number? n) → boolean?
 ;  n : any/c
+
+;48 -Funcion que muestra el numerador de un numero racional
+; (numerator x) → integer
+;   x : rational?
+
+;49 -Funcion que determina si un numero es impar
+;(odd? x) → boolean?
+;  x : integer
+
+;50- el numero pi
+;pi : real
+
+;;51 -Formula que determina si un numero es mayor que cero
+; (positive? x) → boolean?
+;   x : real
+
+;; 52 -Fromula que nos brinda el cociente
+; (quotient x y) → integer
+  ; x : integer
+  ; y : integer
+
+;; 53 -Formula que genera numeros aleatorio natura menor al numero dado
+; (random x) → natural
+;   x : natural
 
 
