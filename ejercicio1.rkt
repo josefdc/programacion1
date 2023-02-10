@@ -290,8 +290,8 @@
 
 ;36 -Formula que determina el mínimo común múltiplo de dos enteros (exacto o inexacto).
 ; (lcm x y ...) → integer
-;   x : integer
 ;   y : integer
+;   x : integer
 (+ (* (lcm 4 7) (expt 2 3)) (floor (/ pi 2))) ;225.0
 (* (lcm (abs (- 14 3)) (abs (- 17 20))) (sin (* pi (/ 1 2)))) ;33.0
 (/ (lcm (abs (modulo 11 7)) (abs (modulo 9 4))) (expt (cos pi) 2)) ;4.0
@@ -341,51 +341,203 @@
 ; (min x y ...) → real
 ;   x : real
 ;   y : real
+(min (+ 2 3) (- 9 16)) ;-7
+(min (* 6 8) (/ 42 5)) ;8.4
+(min (expt 1 2) (expt pi 2)) ;#i1.0
 
 ;43 -funcion que determina el residuo
 ; (modulo x y) → integer
 ;   x : integer
 ;   y : integer
+(modulo (+ 3 7) 5) ;0
+(modulo (* 3 7) 5) ;1
+(modulo (- 3 7) 5) ;1
 
 ;44 -Funcion que detemina si un numero es menor que 0
 ; (negative? x) → boolean?
 ;   x : real
+(negative? -3.14) ;#true
+(negative? 0) ;#false
+(negative? 4.2) ;#false
+
 
 ;45 -Funcion que convierte un numero en un string
 ; (number->string x) → string
 ;   x : number
+(number->string 3.14) ;"157/50"
+(number->string 42) ;"42"
+(number->string -7) ; "-7"
+
 
 ;46 - funcion que convierte un numero a un string con un numero especifico de digitos
 ; (number->string-digits x p) → string
 ;   x : number
 ;   p : posint
+(number->string-digits 3.1416 2) ; "3.14"
+(number->string-digits 42 3);"42"
+(number->string-digits -7 1) ;"-7"
+
 
 ;47 -Funcion que determina si cualquier valor es un numero
 ;(number? n) → boolean?
 ;  n : any/c
+(number? 3.14) ;#true
+(number? 42) ;#true
+(number? "hello") ;#false
+
 
 ;48 -Funcion que muestra el numerador de un numero racional
 ; (numerator x) → integer
 ;   x : rational?
+(numerator (/ 3 7))
+(numerator (quotient 4 2))
+(numerator (- 8 3/7))
 
 ;49 -Funcion que determina si un numero es impar
 ;(odd? x) → boolean?
 ;  x : integer
+(odd? (round (* pi 7)))
+(odd? (- (quotient 4 2) (modulo 8 3)))
+(odd? (abs (- (expt 2 3) 7)))
+
 
 ;50- el numero pi
 ;pi : real
+ (make-rectangular (* 2 (sin pi)) (* 2 (cos pi))) ;  #i2.4492127076447545e-16-2.0i
+(make-rectangular (* 4 (sin pi)) (* 4 (cos pi))) ;  #i4.898425415289509e-16-4.0i
+(make-rectangular (* 3 (sin pi)) (* 3 (cos pi))) ;  #i3.673819061467132e-16-3.0i
 
 ;;51 -Formula que determina si un numero es mayor que cero
 ; (positive? x) → boolean?
 ;   x : real
+(positive? (* pi 7))
+(positive? (- (sqrt 4) (log 1000)))
+(positive? (+ (expt 2 3) (sin 30)))
+
 
 ;; 52 -Fromula que nos brinda el cociente
 ; (quotient x y) → integer
   ; x : integer
   ; y : integer
+(quotient (* 7 11) 3)
+(quotient (- (expt 3 2) 4) 2)
+(quotient (+ (modulo 8 3) 5) 7)
 
 ;; 53 -Formula que genera numeros aleatorio natura menor al numero dado
 ; (random x) → natural
 ;   x : natural
+(random (+ 10 (sin (* pi 5))))
+(random (* (expt 2 3) (log 100)))
+(random (- (quotient (* 7 11) 3) (modulo 7 3)))
 
 
+;;54- Formula que determina si un numero es racional
+; (rational? x) → boolean?
+;   x : any/c
+(rational? 1)
+(rational? 1/2)
+(rational? 1.5)
+
+;; 55 - funcion queExtrae la parte real de un numero complejo
+; (real-part x) → real
+;   x : number
+(real-part (+ 10 (sin (* pi 5))))
+(real-part (* (expt 2 3) (log 100)))
+(real-part (- (quotient (* 7 11) 3) (modulo 7 3)))
+
+;; 56 determina si un numero es real
+; (real? x) → boolean?
+;   x : any/c
+(real? 1)
+(real? 1/2)
+(real? 1.5)
+
+;;57 formula que entrega el residuo
+; (remainder x y) → integer
+;   x : integer
+;   y : integer
+(+ (* (quotient 11 3) 3) (remainder 11 3))
+(* (cos (* (sin 3) (pi))) (abs (- 11 3)))
+(- (expt 2 (round (log (abs (remainder 11 3))))) (floor (/ 11 (remainder 11 3))))
+
+
+;;58 -formula que redondea un numero real a un entero 
+;(round x) → integer
+ ; x : real
+(+ (round (sqrt (abs (- 9 (expt 2 (round (log (sin (* (cos pi) 2))))))))) (modulo (round (* 3.5 7)) 4))
+(expt 2 (round (- (log (abs (round (/ 11 3)))) (sin (round (* pi 7))))))
+(* (floor (sqrt (abs (round (* pi 7))))) (ceiling (abs (round (/ 11 3)))))
+
+ ;59 -Formula que determina el signo de un numero
+;  (sgn x) → (union 1 #i1.0 0 #i0.0 -1 #i-1.0)
+  ; x : real
+(+ (sgn 10) (* (sgn -2) (sgn 3.14)))
+(* (abs (- (sgn -5) (sgn 1))) (expt (sgn 0) 2))
+(/ (sgn 0.0) (sgn -1))
+
+; 60 -formula de sin 
+; (sin x) → number
+;   x : number
+(+ (sin 0) (* (sin (/ pi 2)) (sin pi)))
+(* (cos (/ pi 4)) (sin (* pi 3/2)))
+(/ (sin pi) (sin (/ pi 2)))
+
+; 61 -formula de sinh
+; (sinh x) → number
+;   x : number
+(+ (sinh 0) (* (sinh 1) (sinh 2)))
+(* (cosh (/ pi 4)) (sinh (* pi 3/2)))
+(/ (sinh pi) (sinh (/ pi 2)))
+
+;62
+;(sqr x) → number
+  ;x : number
+(+ (sqr 2) (* (sqr 3) (sqr 4)))
+(* (sqr (- 2)) (sqr (/ 16 2)))
+(/ (sqrt (sqr 9)) (sqr 2))
+
+;63
+; (sqrt x) → number
+;   x : number
+(+ (sqrt 2) (* (sqrt 3) (sqrt 4)))
+(* (sqrt (- 2)) (sqrt (/ 16 2)))
+(/ (sin (sqrt pi)) (sqrt 2))
+;64
+; (sub1 x) → number
+;   x : number
+(+ (sub1 2) (* (sub1 3) (sub1 4)))
+(* (sub1 (- 2)) (sub1 (/ 16 2)))
+(/ (cos (sub1 pi)) (sub1 2))
+;65 
+;(tan x) → number
+ ; x : number
+ (* (tan pi) (tan (/ pi 2)))
+(/ (tan (* pi 2)) (tan pi))
+(+ (tan pi) (tan 0))
+
+;66
+ ;(zero? x) → boolean?
+  ;x : number
+
+;; -------------------------------- 1.6 Booleans -------------------------------------------------
+
+;67
+; (boolean->string x) → string
+;   x : boolean?
+
+;68
+; (boolean=? x y) → boolean?
+  ;x : boolean?
+  ; y : boolean?
+
+;69
+;(boolean? x) → boolean?
+; x : any/c
+
+;70
+; (false? x) → boolean?
+;   x : any/c
+
+;71
+;(not x) → boolean?
+;  x : boolean?
