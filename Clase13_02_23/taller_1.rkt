@@ -201,7 +201,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite el radio: ")
 (define r (read))
 (display "El volumen de la esfera es: ")
-(* (4/3) PI (* r r r))
+(* 4/3 PI (* r r r)) ; si el radio es = 3 la el volumen es 113.094
 ;-------- Volumen de un cilindro--------
 (display "Volumen del Cilindro")
 (newline)
@@ -213,7 +213,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite la altura: ")
 (define h (read))
 (display "El volumen del Cilindro es: ")
-(* PI (* r r) h)
+(* PI (* r r) h) ; con r = 4 y h = 5 , el volumen es 251.3200
 ;-------Volumen de Un cono------
 (display "Volumen de un Cono")
 (newline)
@@ -225,7 +225,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite la altura: ")
 (define h (read))
 (display "El volumen del Cono es: ")
-(* (1/3) PI (* r r) h)
+(* 1/3 PI (* r r) h) ; con r = 4 y h = 5 , el volumen es 83.77
 ;-------Volumen de Cono truncado-----
 (display "Volumen de un Cono Truncado")
 (newline)
@@ -239,7 +239,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite la altura: ")
 (define h (read))
 (display "El volumen del Cono Truncado es: ")
-(* (1/3) PI h (+ (* r1 r1) (* r2 r2) (* r1 r2)))
+(* 1/3 PI h (+ (* r1 r1) (* r2 r2) (* r1 r2)));r1=4 , r2=5 volumen es 255.5086
 ;------Conversion de Farenheit a Celcius------
 
 (display "Conversión de Farenheit a Celsius")
@@ -249,7 +249,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite la temperatura en grados Farenheit: ")
 (define F (read))
 (display "La temperatura en grados Celsius es: ")
-(* (/ (- F 32) (* 5 9)))
+(* (/ (- F 32) (* 5 9))); Farenheith 100, temperatura en grados celsius es 1(23/45)
 ;------Distancia entre dos puntos------
 (display "Distancia entre dos puntos en un plano cartesiano")
 (newline)
@@ -264,7 +264,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite la coordenada y2: ")
 (define y2 (read))
 (display "La distancia entre los puntos es: ")
-(sqrt (+ (* (- x2 x1) (- x2 x1)) (* (- y2 y1) (- y2 y1))))
+(sqrt (+ (* (- x2 x1) (- x2 x1)) (* (- y2 y1) (- y2 y1)))); x1 = 2, y1 = 2,x2 = 4, y2 = 4, distancia = 2.8284271247461903
 ;------Pendiente de una recta-----
 (display "Calculo de la Pendiente de una Recta")
 (newline)
@@ -279,7 +279,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite la coordenada y2: ")
 (define y2 (read))
 (display "La pendiente de la recta es: ")
-(/ (- y2 y1) (- x2 x1))
+(/ (- y2 y1) (- x2 x1)) ; x1 = 2, y1 = 4, x2 = -5, y2 = 7, m=-3/7
 ;---Calculo de la hipotenusa teniendo los catetos ---
 (display "Calculo de la Hipotenusa de un Triángulo Rectángulo")
 (newline)
@@ -290,7 +290,7 @@ P_3(+ (* 2 3) 5) ;-> 11
 (display "Digite el valor del segundo cateto: ")
 (define cateto2 (read))
 (display "El valor de la hipotenusa es: ")
-(sqrt (+ (* cateto1 cateto1) (* cateto2 cateto2)))
+(sqrt (+ (* cateto1 cateto1) (* cateto2 cateto2))) ; cateto1 = 4 , cateto2 = 3, hipotenusa = 5
 
 
 
