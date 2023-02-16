@@ -1,4 +1,4 @@
-#lang racket
+
 #lang racket
 ;-----figura 1 ------
 (displayln "figura 1")
@@ -60,7 +60,7 @@
 ; -------- Figura 7-------
 (displayln "figura 7")
 (define l 3)
-(define P (* 6 l))
+(define P (* 6 l)) ; se define una variable como una operacion
 (define a 3.5)
 (display "area de un poligono regular ")
 (/ (* P a) 2) ;31.5
@@ -146,7 +146,67 @@
 (define a 4)
 (display "La diagonal del cubo es ")
 (* (sqrt 3) a) ;6.9298
-display "El area lateral de un Dodecaedro es ")
+display "El area lateral de un cubo es ")
 ((* 4 (sqr a)) ;64
 (display "El area total de un cubo es ")
 (expt a 3) ; 64
+;-------Figura 21 -----
+(displayn "Figura 21")
+(define a 4)
+(define b 6)
+(define c 3)
+(display "La diagonal del Ortoedro es ")
+(sqrt (+ (sqr a) (+(sqr b) (sqr c)))) ;7.8102
+(display "El area del Ortoedro es ")
+((* 2 (+(+ (* a b) (* a c))(* b c))) ;108
+(display "El volumen de un Ortaedro es ")
+(* (* a b) c) ; 72
+;-------Figura 22 -----
+(displayln "Figura 22")
+(define a 4)
+(define b 6)
+(define c 3)
+(display "La diagonal del Ortoedro es ")
+(sqrt (+ (sqr a) (+(sqr b) (sqr c)))) ;6.9298
+(display "El area del Ortoedro es ")
+(* 2 (+(+ (* a b) (* a c))(* b c))) ;64
+(display "El volumen de un Ortaedro es ")
+(* (* a b) c) ; 64
+;------ Figura 23 -----
+(displayln "Figura 23")
+(define Pb (* 5 6))
+(define h 12)
+(define Al (* Pb h))
+(define Ab 30)
+(define At (+ Al (* 2 Ab ) ))
+(define V (* At h))
+(newline)
+(display "Perimetro de la base del prisma ")
+(display Pb) ;21
+(newline)
+(display "El area lateral del prisma ")
+(display Al) ;360
+(newline)
+(display "El area total del prisma ")
+(display At) ;420
+(newline)
+(display "El volumen del prisma ")
+(display V) ;5040
+;------ Figura 24-------
+(displayln "Figura 24")
+(define Pb (* 5 6))
+(define h 12)
+(define Ap 15)
+(define Al (/ (* Pb Ap) 2))
+(define ap 3)
+(define Ab 24)
+(newline)
+(display "El area lateral de la piramide ")
+(/ (* Pb Ap) 2) ;225
+(newline)
+(display "El area total de la piramide ")
+(+ Al Ab) ;249
+(newline)
+(display "El volumen del prisma ")
+(/ (* Ab h)3) ;96
+;------ figura 25  ----
