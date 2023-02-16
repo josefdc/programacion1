@@ -1,3 +1,7 @@
+#lang racket
+#lang racket
+;-----figura 1 ------
+(displayln "figura 1")
 (display "Calculo del perimetro de un cuadrado")
 (newline)
 (display "Formula del perimetro de un cuadrado P = 4 * L y del area es L*L ")
@@ -125,7 +129,24 @@
 ;------ figura 18 ------
 (displayln "Figura 18")
 (define a 4)
-(display "El area de un octaedro ")
+(display "El area de un Icosaedro ")
 (* 5 (sqrt 3) (sqr a));138.5640
-(display "El volumen de un octaedro ")
+(display "El volumen de un Icosaedro ")
 (/ (*(* 5 (+ 3 (sqrt5)))(expt a 3))12) ; 139.6284
+;-------figura 19-------
+(displayln "Figura 19")
+(define a 4)
+(define ap 6)
+(display "El area de un Dodeacaedro ")
+(* 30 (* a ap);720
+(display "El volumen de un Dodeacaedro ")
+(/ (*(+ 15 (* 7 (sqrt 5))) (expt a 3)) 4) ; 490.4346
+;------figura 20------
+(displayln "Figura 20")
+(define a 4)
+(display "La diagonal del cubo es ")
+(* (sqrt 3) a) ;6.9298
+display "El area lateral de un Dodecaedro es ")
+((* 4 (sqr a)) ;64
+(display "El area total de un cubo es ")
+(expt a 3) ; 64
