@@ -209,4 +209,4 @@ display "El area lateral de un cubo es ")
 (newline)
 (display "El volumen del prisma ")
 (/ (* Ab h)3) ;96
-;------ figura 25  ----
+;------ figura 25  ------
