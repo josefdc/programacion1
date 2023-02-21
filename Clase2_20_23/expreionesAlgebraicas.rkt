@@ -1,7 +1,8 @@
+#lang racket
 ;;Pasar las siguientes expresiones de notacion inorden a preorden
 ;-2x^3+3x^2+10
 (define x 2)
-((+ (* -2 (expt x 3)) (+(* 3 (expt x 2)) 10)) ; 6
+(+ (* -2 (expt x 3)) (+(* 3 (expt x 2)) 10)) ; 6
 ;5x^3y^2+3x^2y-2x^3y^2-3x^3y^2-4
 (define x 2)
 (define y 3)

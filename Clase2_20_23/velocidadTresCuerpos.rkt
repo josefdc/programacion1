@@ -1,4 +1,3 @@
-;El usario digita los valores
 #lang racket
 ;El usario digita los valores
 (display "Digite el Tiempo del cuerpo 1")
