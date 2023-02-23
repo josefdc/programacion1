@@ -14,7 +14,7 @@ tiene radio R que sera introducido por teclado, la 2da tiene radio 2R y la 3ra t
 (displayln"La Longitud de la Primera circunferencia es:")
 ;L.C
 (define pi. 3.1415)
-(round (* 2(* pi. r )))
+(round (* 2(* pi. r )))+
 (newline)
 (displayln"El Area de la primera circunferencia es:")
 ;A.C
