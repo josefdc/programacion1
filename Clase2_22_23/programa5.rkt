@@ -1,3 +1,4 @@
+#lang racket
 ; Definimos la variable vajillas
 (define vajillas 22)
 
