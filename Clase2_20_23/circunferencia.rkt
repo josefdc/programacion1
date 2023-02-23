@@ -1,3 +1,4 @@
+#lang racket
 (displayln "Realizar un programa que calcule la longitud y el area total de tres circunferencias sabiendo que la primera
 tiene radio R que sera introducido por teclado, la 2da tiene radio 2R y la 3ra tiene radio 3R.")
 
