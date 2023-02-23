@@ -1,49 +1,50 @@
 #lang racket
-(displayln "Realizar un programa que calcule la longitud y el area total de tres circunferencias sabiendo que la primera
-tiene radio R que sera introducido por teclado, la 2da tiene radio 2R y la 3ra tiene radio 3R.")
 
-;La longitud de la circunferencia: 2*pi*r
-;Donde: r es el radio, y pi=3.141592
-;Area de la circunferencia: R^2*pi
-(newline)
+; Se imprime un mensaje explicando el objetivo del programa
+(displayln "Este programa calcula la longitud y el área total de tres circunferencias con radios R, 2R y 3R.")
 
+; Se define el valor de pi para ser utilizado en los cálculos
+(define pi 3.141592)
 
-(displayln"Ingrese el radio r de la circunferencia:")
-(define r (read))
-(newline)
-(displayln"La Longitud de la Primera circunferencia es:")
-;L.C
-(define pi. 3.1415)
-(round (* 2(* pi. r )))+
-(newline)
-(displayln"El Area de la primera circunferencia es:")
-;A.C
-(round(* pi.(sqr r)))
-
+; Se solicita al usuario que ingrese el valor de R
+(displayln "Ingrese el valor del radio R:")
+(define R (read))
 
 (newline)
+
+; Cálculo y muestra de los resultados para la primera circunferencia
+(displayln "Resultados para la primera circunferencia:")
+
+; Longitud de la circunferencia (L.C.): 2 * pi * r
+(define LC1 (round (* 2 pi R)))
+(displayln (format "Longitud: ~a" LC1))
+
+; Área de la circunferencia (A.C.): pi * r^2
+(define AC1 (round (* pi (sqr R))))
+(displayln (format "Área: ~a" AC1))
+
 (newline)
 
+; Cálculo y muestra de los resultados para la segunda circunferencia
+(displayln "Resultados para la segunda circunferencia:")
 
-(displayln"La Longitud de la 2da circunferencia es:")
-;L.C
-(define pi. 3.1415)
-(round (* 2(* pi. (* r  2))))
+; Longitud de la circunferencia (L.C.): 2 * pi * r
+(define LC2 (round (* 2 pi (* 2 R))))
+(displayln (format "Longitud: ~a" LC2))
+
+; Área de la circunferencia (A.C.): pi * r^2
+(define AC2 (round (* pi (sqr (* 2 R)))))
+(displayln (format "Área: ~a" AC2))
+
 (newline)
-(displayln"El Area de la 2da circunferencia es:")
-;A.C
-(round(* pi.(sqr r)))
 
+; Cálculo y muestra de los resultados para la tercera circunferencia
+(displayln "Resultados para la tercera circunferencia:")
 
-(newline)
-(newline)
+; Longitud de la circunferencia (L.C.): 2 * pi * r
+(define LC3 (round (* 2 pi (* 3 R))))
+(displayln (format "Longitud: ~a" LC3))
 
-
-(displayln"La Longitud de la 3ra circunferencia es:")
-;L.C
-(define pi. 3.1415)
-(round (* 2(* pi. (* r  3))))
-(newline)
-(displayln"El Area de la 3ra circunferencia es:")
-;A.C
-(round(* pi.(sqr r)))
+; Área de la circunferencia (A.C.): pi * r^2
+(define AC3 (round (* pi (sqr (* 3 R)))))
+(displayln (format "Área: ~a" AC3))
