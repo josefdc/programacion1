@@ -1,0 +1,326 @@
+;;progrma 1
+#lang racket
+
+(display "Cuantos dolares desea convertir?")
+(define dolares (read))
+(display "usted tiene ")
+(define pesos (* dolares 4883.03))
+(display pesos )
+(display " pesos ")
+;;progrma 2
+#lang racket
+;; Pedir datos de temperatura al usuario
+;; Función para convertir Celsius a Fahrenheit
+(define (celsius->fahrenheit celsius)
+  (+ (* celsius 1.8) 32))
+
+;; Función para convertir Fahrenheit a Celsius
+(define (fahrenheit->celsius fahrenheit)
+  (/ (- fahrenheit 32) 1.8))
+
+;; Función para convertir Celsius a Kelvin
+(define (celsius->kelvin celsius)
+  (+ celsius 273.15))
+
+;; Función para convertir Kelvin a Celsius
+(define (kelvin->celsius kelvin)
+  (- kelvin 273.15))
+
+;; Función para convertir Fahrenheit a Kelvin
+(define (fahrenheit->kelvin fahrenheit)
+  (celsius->kelvin (fahrenheit->celsius fahrenheit)))
+
+;; Función para convertir Kelvin a Fahrenheit
+(define (kelvin->fahrenheit kelvin)
+  (celsius->fahrenheit (kelvin->celsius kelvin)))
+(display "Ingrese una temperatura en grados Celsius: ")
+(define celsius (read))
+(define fahrenheit (celsius->fahrenheit celsius))
+(define kelvin (celsius->kelvin celsius))
+
+;; Imprimir tabla de temperatura
+(display "+---------+-----------+---------+\n")
+(display "| Celsius | Fahrenheit|  Kelvin |\n")
+(display "+---------+-----------+---------+\n")
+(format "|   ~a   |    ~a   |   ~a   |\n" celsius fahrenheit kelvin)
+(display "+---------+-----------+---------+\n")
+
+;; Pedir datos de temperatura al usuario
+(display "Ingrese una temperatura en grados Fahrenheit: ")
+(define fah_temp (read))
+(define cel_temp (fahrenheit->celsius fah_temp))
+(define kel_temp (celsius->kelvin cel_temp))
+
+;; Imprimir tabla de temperatura
+(display "+-----------+---------+-----------+\n")
+(display "| Fahrenheit| Celsius |   Kelvin  |\n")
+(display "+-----------+---------+-----------+\n")
+(format "|    ~a    |   ~a    |   ~a   |    |\n " fah_temp cel_temp kel_temp )
+(display "+-----------+---------+-----------+-----------+-----------+-----------+\n")
+
+;; Pedir datos de temperatura al usuario
+(display "Ingrese una temperatura en grados Kelvin: ")
+(define kel_temp1 (read))
+(define cel_temp1 (kelvin->celsius kel_temp))
+(define fah_temp1 (celsius->fahrenheit cel_temp))
+
+;; Imprimir tabla de temperatura
+(display "+-----------+-----------+-----------+\n")
+(display "|   Kelvin  | Celsius   | Fahrenheit|\n")
+(display "+-----------+-----------+---------+--\n")
+(format "|   ~a   |   ~a    |    ~a   |  \n" kel_temp1 cel_temp1 fah_temp1 )
+(display "+-----------+-----------+---------+")
+
+;;progrma 3
+#lang racket
+(displayln "Ingresa la cantidad de monedas de $20:")
+(define num-monedas-20 (read))
+  
+(displayln "Ingresa la cantidad de monedas de $50:")
+(define num-monedas-50 (read))
+  
+(displayln "Ingresa la cantidad de monedas de $100:")
+(define num-monedas-100 (read))
+  
+(displayln "Ingresa la cantidad de monedas de $200:")
+(define num-monedas-200 (read))
+  
+(displayln "Ingresa la cantidad de monedas de $500:")
+(define num-monedas-500 (read))
+  
+  (+ (* num-monedas-20 20)
+     (* num-monedas-50 50)
+     (* num-monedas-100 100)
+     (* num-monedas-200 200)
+     (* num-monedas-500 500))
+;;progrma 4
+#lang racket
+
+  (displayln "Ingresa el número de clientes:")
+  (define num-clientes (read))
+  (define ingreso-total (* num-clientes 10000))
+  (define costo-aseo (* num-clientes 2000))
+  (define costo-atencion 300000)
+  (- ingreso-total (+ costo-atencion costo-aseo))
+;;progrma 5
+#lang racket
+; Definimos la variable vajillas
+(define vajillas 22)
+
+; Calculamos el costo total utilizando la expresión
+(define costo-total (+ 3000 (* 50 vajillas)))
+
+; Mostramos el resultado por pantalla
+(displayln costo-total) ; 3700
+
+;;progrma 6
+#lang racket
+;Suponga que se espera que un objeto de arte adquirido por $50.000 aumenten 
+;su valor a una razón constante
+;de $500 por año durante los próximos 40 años
+;
+; Definimos la función que predice el valor de la obra de arte
+(define (valor-arte años)
+  (+ (* años 500) 50000))
+
+; a) Calculamos el valor de la obra de arte después de 40 años
+(define valor-40 (valor-arte 40))
+(displayln "Valor después de 40 años: " )
+(display valor-40 );70000
+(newline)
+
+; b) Calculamos el valor de la obra de arte después de 31 años
+(define valor-31 (valor-arte 31))
+(displayln "Valor después de 31 años: " )
+(display valor-31 );65500
+(newline)
+; c) Calculamos el número de años para que la obra de arte tenga un valor de $55.500
+(define años-55k (/ (- 55500 50000 500) 500))
+(displayln "Años para valor de $55.500: " )
+(display años-55k);10 años
+
+;;progrma 7
+#lang racket
+(display "Ingrese la cantidad de computadoras a producir: ")
+(define x (read));12
+
+(define costo-total (+ 5000 (* x 805)))
+
+(display "El costo total de producir ")
+(display x)
+(display " computadoras en un día es: ")
+(display costo-total) ;14660
+(newline)
+
+(define costo-unitario (/ costo-total x))
+
+(display "El costo unitario por computadora en un día es: ")
+(display costo-unitario);3665/3
+
+;;progrma 8
+#lang racket
+; Calculamos la edad del feto cuya longitud es 28 cm
+(define edad (round (/ (+ 6.7 28) 1.53)))
+
+; Imprimimos el resultado
+(displayln "La edad del feto es: ")
+(display edad)
+(newline)
+;;progrma 9
+#lang racket
+(define (costo-produccion x)
+(+ 200000 (* 400 x)))
+
+; a) ¿Cuál es el costo de producir 30.000 periódicos?
+(define costo-30k (costo-produccion 30000))
+(displayln "Costo de producir 30,000 periódicos: $")
+(display costo-30k)
+(newline)
+
+; b) ¿Cuántos periódicos se han producido si el costo total fue de $520.000?
+(define x-520k (/ (- 520000 200000) 400))
+(displayln "Número de periódicos producidos con un costo total de $520,000: ")
+(display x-520k)
+
+;;progrma 10
+#lang racket
+
+;; Pedimos al usuario que ingrese la altura en metros
+(display "Ingrese la altura en metros: ")
+(define altura (read))
+
+;; a) Calculamos el tiempo que tarda el proyectil en estar a 128 metros del suelo
+(define tiempo-128 (/ (+ (sqrt (- (* 144 4) (* 4 -16 (- altura 128)))))(* 2 -16)))
+(display "Después de cuántos segundos estará el proyectil a 128 metros del suelo: ")
+(display tiempo-128)
+(newline)
+
+;; b) Calculamos el momento en el que el objeto toca el suelo
+(define tiempo-suelo (+ (/ -144 -16) (sqrt (- (/ (* -144 -144) (* 2 (* -16  -16)))))))
+(display "En qué momento toca el suelo el objeto: ")
+(display tiempo-suelo)
+(newline)
+
+;;progrma 12
+#lang racket
+
+;; Pedimos al usuario que ingrese los segundos a convertir
+(display "Ingrese la cantidad de segundos: ")
+(define segundos (read))
+
+;; Calculamos el número de horas
+(define horas (/ segundos 3600))
+
+;; Calculamos el número de minutos
+(define minutos (/ (modulo segundos 3600) 60))
+
+;; Calculamos el número de segundos restantes
+(define segundos-restantes (modulo segundos 60))
+
+;; Mostramos el resultado al usuario
+(display "El resultado es: ")
+(display horas)
+(display " hora(s) ")
+(display minutos)
+(display " minuto(s) ")
+(display segundos-restantes)
+(display " segundo(s)")
+(newline)
+
+;;progrma 13
+#lang racket
+
+;; Pedir calificaciones de matemáticas
+(display "Ingrese la calificación del examen de matemáticas: ")
+(define examen-matematicas (read))
+(display "Ingrese la calificación de la tarea 1 de matemáticas: ")
+(define tarea1-matematicas (read))
+(display "Ingrese la calificación de la tarea 2 de matemáticas: ")
+(define tarea2-matematicas (read))
+(display "Ingrese la calificación de la tarea 3 de matemáticas: ")
+(define tarea3-matematicas (read))
+
+;; Calcular promedio de matemáticas
+(define promedio-tareas-matematicas (/ (+ tarea1-matematicas tarea2-matematicas tarea3-matematicas) 3))
+(define promedio-matematicas (+ (* examen-matematicas 0.9) (* promedio-tareas-matematicas 0.1)))
+
+;; Pedir calificaciones de física
+(display "Ingrese la calificación del examen de física: ")
+(define examen-fisica (read))
+(display "Ingrese la calificación de la tarea 1 de física: ")
+(define tarea1-fisica (read))
+(display "Ingrese la calificación de la tarea 2 de física: ")
+(define tarea2-fisica (read))
+
+;; Calcular promedio de física
+(define promedio-tareas-fisica (/ (+ tarea1-fisica tarea2-fisica) 2))
+(define promedio-fisica (+ (* examen-fisica 0.8) (* promedio-tareas-fisica 0.2)))
+
+;; Pedir calificaciones de química
+(display "Ingrese la calificación del examen de química: ")
+(define examen-quimica (read))
+(display "Ingrese la calificación de la tarea 1 de química: ")
+(define tarea1-quimica (read))
+(display "Ingrese la calificación de la tarea 2 de química: ")
+(define tarea2-quimica (read))
+(display "Ingrese la calificación de la tarea 3 de química: ")
+(define tarea3-quimica (read))
+
+;; Calcular promedio de química
+(define promedio-tareas-quimica (/ (+ tarea1-quimica tarea2-quimica tarea3-quimica) 3))
+(define promedio-quimica (+ (* examen-quimica 0.85) (* promedio-tareas-quimica 0.15)))
+
+;; Calcular promedio general
+(define promedio-general (/ (+ promedio-matematicas promedio-fisica promedio-quimica) 3))
+
+;; Imprimir resultados
+(display "El promedio general es: ")
+(display promedio-general)
+(newline)
+(display "El promedio de matemáticas es: ")
+(display promedio-matematicas)
+(newline)
+(display "El promedio de física es: ")
+(display promedio-fisica)
+(newline)
+(display "El promedio de química es: ")
+(display promedio-quimica)
+(newline)
+
+;;progrma 14
+#lang racket
+(display "Ingrese el precio de compra del artículo: ")
+(define precio-compra (read))
+
+(define precio-venta (* (+ precio-compra (* precio-compra 0.3)) 1.0))
+
+(display "El precio al que debe vender el artículo para obtener una ganancia del 30% es: ")
+(display precio-venta)
+(newline)
+
+
+;;progrma 15
+#lang racket
+
+(displayln "Presupuesto anual del hospital")
+(displayln "================================")
+(display "Ingrese el presupuesto total: ")
+(define presupuesto (read))
+
+(define presupuesto-ginecologia (* presupuesto 0.4))
+(define presupuesto-traumatologia (* presupuesto 0.3))
+(define presupuesto-pediatria (* presupuesto 0.3))
+
+(define costo-ginecologia (/ presupuesto-ginecologia 200))
+(define costo-traumatologia (/ presupuesto-traumatologia 300))
+(define costo-pediatria (/ presupuesto-pediatria 150))
+
+(display "| Area           | Presupuesto | Costo por paciente |\n")
+(display "|----------------|------------|--------------------|\n")
+(display (string-append "| Ginecología    | " (number->string presupuesto-ginecologia) " | " (number->string costo-ginecologia) " |\n"))
+(display "|----------------|------------|--------------------|\n")
+(display (string-append "| Traumatología  | " (number->string presupuesto-traumatologia) " | " (number->string costo-traumatologia) " |\n"))
+(display "|----------------|------------|--------------------|\n")
+(display (string-append "| Pediatría      | " (number->string presupuesto-pediatria) " | " (number->string costo-pediatria) " |\n"))
+(display "|----------------|------------|--------------------|\n")
+
