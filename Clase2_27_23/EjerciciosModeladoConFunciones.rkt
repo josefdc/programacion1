@@ -121,7 +121,7 @@
   (- a b))
 
 ;; funcion para calcular el costo de la funcion
-(define (costoFuncion 300000))
+(define costoFuncion 300000)
 
 ;; funcion para calcular el costo de aseo
 (define (costoAseo a)

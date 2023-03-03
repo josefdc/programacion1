@@ -7,30 +7,41 @@
 ;; definamos multiplicacion
 
 (define (multiplicacion x y)
-(* x y))
+(* x y)
 )
+
 
 ;; definimos suma
 (define (suma x y)
-(+ x y))
+(+ x y)
 )
+
 
 ;; definamos la funcion costo
 (define (costo x)
 (suma 200000 (multiplicacion 400 x)))
-)
+
 
 ;; definamos la inversa al costo
 (define (inversa-costos x)
 (/ (- x 200000) 400)
 )
 
-;; definamos la funcion produccion
-(define (produccion x)
-(suma 30000 (inversa-costos x)))
-)
+
+
 
 ;; definamos la funcion principal
-(define (principal x)
+(define (principal)
+(display "Digite el numero de periodicos producidos: ")
+(define periodicos (read))
+(display "el costo de produccion es ")
+(display (costo periodicos))
+(newline)
+(display "Cuanto dinero se ha gastado en produccion: ")
+(define dinero (read))
+(display "Se han producido ")
+(display (inversa-costos dinero))
 )
+;; llamamos la funcion
 
+(principal)
