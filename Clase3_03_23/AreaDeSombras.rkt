@@ -35,11 +35,11 @@
 ;;-------b----------
 ;;Figura2, Area de un cuadrado menos el area de un cuadrado menor con un circulo dentro
 
+
 ;; definimos la funcion area de un circulo
 (define (area-circulo r)
   (multiplicacion 3.1416 (multiplicacion r r))
   )
-
 ;; area cuadrado menor
 (define (area-cuadrado-menor a)
    (area-cuadrado a) 
