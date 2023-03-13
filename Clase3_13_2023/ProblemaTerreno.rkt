@@ -19,9 +19,9 @@
       (* 0.75 area)
       (if (> area 500)
           (* 0.83 area)
-          (if (> area 400)
-              (* 0.90 area)
-              area))))
+          (if (> area 400) ;; si no cumple ninguna de las condiciones anteriores, no hay descuento
+              (* 0.90 area);; si no cumple ninguna de las condiciones anteriores, no hay descuento
+              area)))) ;; si no cumple ninguna de las condiciones anteriores, no hay descuento
 
 ;; definamos la funcion del precio del terreno
 (define (precio-terreno longitud ancho precio)
