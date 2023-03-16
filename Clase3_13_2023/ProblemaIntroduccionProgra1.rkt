@@ -11,4 +11,23 @@
 ; De esta forma, la nota final de un estudiante que obtuvo las notas 3.0, 2.0, 4,5 y 3,2, sera 3.8. Haga un programa que
 ; lea las 4 notas de un estudiante y calcule y escriba su nota definitiva.
 
-;; entr
+;; entrada: 4 notas
+;; salida: nota definitiva
+;; proceso: calcular la nota definitiva
+
+; definimos la funcion que elimine el menor de los 4 numeros con IF
+(define (menor x y z w)
+  (if (< x y)
+      (if (< x z)
+          (if (< x w) x (menor y z w))
+          (if (< z w) z (menor x y w)))
+      (if (< y z)
+          (if (< y w) y (menor x z w))
+          (if (< z w) z (menor x y w)))))
+; definamos la funcion que la mayor nota dentro de las tres tendra un porcentaje del 50%
+
+
+
+
+
+
