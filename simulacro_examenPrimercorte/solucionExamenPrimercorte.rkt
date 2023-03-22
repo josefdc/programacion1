@@ -198,3 +198,106 @@ cuadrados el descuento es del 25%.
 
 
 
+;; programa que recibe 5 numeros y muestra los 4 sin el mayor, luego los tres sin el menor y luego
+;los dos sin el mayor 
+;; ejemplo
+;; 1 2 3 4 5
+;; 1 2 3 4
+;; 2 3 4
+;; 2 3
+
+;; programa que recibe 5 numeros y muestra los 4 sin el mayor, luego los tres sin el menor y luego
+;los dos sin el mayor 
+;; ejemplo
+;; 1 2 3 4 5
+;; 1 2 3 4
+;; 2 3 4
+;; 2 3
+
+;; definamos la funcion que define el mayor
+(define (mayor a b c d e)
+    (if (>= a b)
+        (if (>= a c)
+            (if (>= a d)
+                (if (>= a e)
+                    a
+                    e)
+                (if (>= d e)
+                    d
+                    e))
+            (if (>= c d)
+                (if (>= c e)
+                    c
+                    e)
+                (if (>= d e)
+                    d
+                    e)))
+        (if (>= b c)
+            (if (>= b d)
+                (if (>= b e)
+                    b
+                    e)
+                (if (>= d e)
+                    d
+                    e))
+            (if (>= c d)
+                (if (>= c e)
+                    c
+                    e)
+                (if (>= d e)
+                    d
+                    e))))))
+
+;; definamos la funcion que define el menor de 4 numeros
+(define (menor4 a b c d)
+    (if (<= a b)
+        (if (<= a c)
+            (if (<= a d)
+                a
+                d)
+            (if (<= c d)
+                c
+                d))
+        (if (<= b c)
+            (if (<= b d)
+                b
+                d)
+            (if (<= c d)
+                c
+                d))))
+
+;; definamos la funcion para el mayor de 3 numeros
+(define (mayor3 a b c)
+    (if (>= a b)
+        (if (>= a c)
+            a
+            c)
+        (if (>= b c)
+            b
+            c))))
+
+;; definamos la funcion para el menor de 3 numeros
+(define (menor3 a b c)
+    (if (<= a b)
+        (if (<= a c)
+            a
+            c)
+        (if (<= b c)
+            b
+            c))))
+
+;; definamos la funcion para el mayor de 2 numeros
+(define (mayor2 a b)
+    (if (>= a b)
+        a
+        b))
+
+;; definamos la funcion para el menor de 2 numeros
+(define (menor2 a b)
+    (if (<= a b)
+        a
+        b))
+
+;; definamos la funcion principal
+(define (main)
+)
