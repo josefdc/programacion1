@@ -1,8 +1,4 @@
 #lang racket
-
-;; definamos la funcion para saber si es numero primo a traves de condicionales if
-
-
 ; Problema 1
 ; un programa que reciba cuatro números y diga cuáles son primos
 ;  y cuáles no lo son, los que son primos los suma y los que no lo son los multiplique
@@ -103,9 +99,108 @@
 
 (main)
 
+
+; Se requiere de una función que permita leer: Nombre, la cédula, salario básico y año de vinculación 
+; de un empleado y que permita calcular su salario neto
+; sabiendo que:
+; • Si gana más de $1500000 y entró a trabajar después de 1990 se le
+; debe descontar un 8% al salario.
+; • Si gana entre $1000000 y $1500000, se le debe descontar un 5% del salario
+; • Si gana menos de $1000000 ó entró a trabajar antes o en 1990 se le descuenta
+; 2% al salario.
+; • Si el trabajador lleva más de 15 años en la empresa tendrá una bonificación del 10% acorde a su salario.
+; • Pero si el trabajador lleva menos de 10 años no tendrá ninguna bonificación.
+
+; Ejemplo: 
+
+; Nombre: Juan Hernandez 
+; Cedula: 70.513.621
+; Salario: $1.200.000
+; Año de vinculación: 2015
+; Años en la empresa: 8 
+; Respuestas del programa:
+; Como usted gana $1.200.000 se le descontará de su salario el 5%
+; Salario con el descuento: $1.140.000
+; Su bonificación es del 0% 
+; Bonificación: Sin bonificación 
+
+; Ejemplo 2:
+
+; Nombre: Mauricio Hoyos 
+; Cedula: 1.020.399.469
+; Salario: $1.600.000
+; Año de vinculación: 1992
+; Años en la empresa: 31
+; Respuestas del programa:
+; Como usted gana $1.600.000 se le descontará de su salario el 8%
+; Salario con el descuento: $1.472.000
+; Su bonificación es del 10% 
+; Bonificación: $1.619.200
+
 ; Problema 1. 
 ; En una empresa de fabricación de prendas se compra la tela al por mayor de la siguiente manera: se tiene la base mayor, base menor y la altura(trapecio), entre más metros 
 ; cuadrados de tela compre, más descuento le harán, por ejemplo: si compran menos de 100 metros cuadrados no se hará descuento, si compran menos de 300 metros cuadrados 15%, si compran menos de 500 metros cuadrados 20% y si compran mas de 700 metros cuadrados 30%, teniendo en cuenta que el metro cuadrado de tela es a 2000 pesos, hacer un programa que calcule el descuento de la compra.
+; Ejemplo: 
+; B= 10 b= 5 h=8  A= (B+b)/2*h
+; A= 60 metros cuadrados, y se multiplica por 2000 (precio de tela por metro cuadrado)
+; R= 120000, sin descuento
+
+;ejercicio 3a 
+(define (descuento salario vinculacion)
+  (if (> salario 1500000)
+      (if (> vinculacion 1990)
+          (* salario 0.08)
+          0)
+      (if (and (<= salario 1500000) (>= salario 1000000))
+          (* salario 0.05)
+          (* salario 0.02))))
+
+(define (bonificacion salario vinculacion)
+  (define años-trabajados (- 2023 vinculacion))
+  (if (> años-trabajados 15)
+      (* salario 0.1)
+      (if (< años-trabajados 10)
+          0
+          0)))
+
+(define (main)
+  (display "Ingrese el nombre: ")
+  (define nombre (read-line))
+  (display "Ingrese la cédula: ")
+  (define cedula (read-line))
+  (display "Ingrese el salario básico: $")
+  (define salario (read))
+  (display "Ingrese el año de vinculación: ")
+  (define vinculacion (read))
+  (newline)
+  (display "Nombre: ")
+  (display nombre)
+  (newline)
+  (display "Cedula: ")
+  (display cedula)
+  (newline)
+  (display "Salario: $")
+  (display salario)
+  (newline)
+  (display "Año de vinculación: ")
+  (display vinculacion)
+  (newline)
+  (display "Salario con el descuento: $")
+  (display (- salario (descuento salario vinculacion)))
+  (newline)
+  (display "Bonificación: $")
+  (display (bonificacion salario vinculacion))
+  (newline)
+  (display "Salario neto: $")
+  (display (+ salario (- (descuento salario vinculacion)) (bonificacion salario vinculacion)))
+  (newline))
+
+;; Ejemplo de uso
+(main)
+
+; En una empresa de fabricación de prendas se compra la tela al por mayor de la siguiente manera: 
+; se tiene la base mayor, base menor y la altura(trapecio), entre más metros cuadrados 
+; de tela compre, más descuento le harán, por ejemplo: si compran menos de 100 metros cuadrados no se hará descuento, si compran menos de 300 metros cuadrados 15%, si compran menos de 500 metros cuadrados 20% y si compran mas de 700 metros cuadrados 30%, teniendo en cuenta que el metro cuadrado de tela es a 2000 pesos, hacer un programa que calcule el descuento de la compra.
 ; Ejemplo: 
 ; B= 10 b= 5 h=8  A= (B+b)/2*h
 ; A= 60 metros cuadrados, y se multiplica por 2000 (precio de tela por metro cuadrado)
@@ -596,27 +691,92 @@
   
   (if (> monto 500000)
       (begin
-        (define descuento (calcular-descuento monto))
-        (define monto-descuento (- monto descuento))
-        (define prestamo (calcular-prestamo monto-descuento))
-        (define credito (calcular-credito (- monto-descuento prestamo)))
-        (define total-pagar (calcular-monto-total credito))
-        (display "Descuento: ") (displayln descuento)
-        (display "Prestamo al banco: ") (displayln prestamo)
-        (display "Crédito al fabricante: ") (displayln credito)
-        (display "Total a pagar con intereses: ") (displayln total-pagar))
+        (display "Descuento: ") (displayln (calcular-descuento monto))
+        (display "Prestamo al banco: ") (displayln (calcular-prestamo (- monto (calcular-descuento monto))))
+        (display "Crédito al fabricante: ") (displayln (calcular-credito (- monto (calcular-descuento monto) 
+        (calcular-prestamo (- monto (calcular-descuento monto))))))
+        (display "Total a pagar con intereses: ") (displayln (calcular-monto-total
+         (calcular-credito (- monto (calcular-descuento monto) (calcular-prestamo (- monto (calcular-descuento monto))))))))
       (begin
-        (define dinero-propio (calcular-dinero-propio monto))
-        (define credito (calcular-credito monto))
-        (define total-pagar (calcular-monto-total credito))
-        (display "Dinero propio: ") (displayln dinero-propio)
-        (display "Crédito al fabricante: ") (displayln credito)
-        (display "Total a pagar con intereses: ") (displayln total-pagar))))
+        (display "Dinero propio: ") (displayln (calcular-dinero-propio monto))
+        (display "Crédito al fabricante: ") (displayln (calcular-credito monto))
+        (display "Total a pagar con intereses: ") (displayln (calcular-monto-total (calcular-credito monto))))))
+
+(main)
+
+; Problema 1
+; Un negocio vende hamburguesas, y para calcular el precio final se tiene en cuenta 
+;el tipo de hamburguesa, el tamaño, y los ingredientes adicionales que el cliente quiera agregar. 
+;La empresa ha establecido las siguientes reglas:
+; El precio base de una hamburguesa sencilla es de $5.
+; Si el cliente quiere una hamburguesa doble, se cobra un adicional de $2.
+; Si el cliente quiere una hamburguesa triple, se cobra un adicional de $3.
+; Si el cliente quiere papas fritas, se cobra un adicional de $1.5.
+; Si el cliente quiere refresco, se cobra un adicional de $1.
+; Si el cliente quiere ambos, se cobra un adicional de $2.
+; Si el cliente quiere agregar queso, se cobra un adicional de $0.5.
+; Si el cliente quiere agregar tocino, se cobra un adicional de $1.
+; Además, se aplican los siguientes descuentos:
+; Si el cliente ordena más de 3 hamburguesas, se aplica un descuento del 10% al total.
+; Si el cliente gasta más de $20 en su orden, se aplica un descuento del 5% al total.
+
+; ejecicio 11 a
+; Funciones auxiliares
+(define (calcular-precio-hamburguesa tipo)
+  (+ 5 (if (equal? tipo "doble") 2 (if (equal? tipo "triple") 3 0))))
+
+(define (calcular-precio-adicionales papas refresco queso tocino)
+  (+ (if papas (if refresco 2 1.5) (if refresco 1 0))
+     (if queso 0.5 0)
+     (if tocino 1 0)))
+
+(define (calcular-descuento cantidad total)
+  (* total (if (> cantidad 3) 0.10 (if (> total 20) 0.05 0))))
+
+; Función principal
+(define (main)
+  (display "Ingrese el tipo de hamburguesa (sencilla, doble, triple): ")
+  (define tipo (read-line))
+  (display "¿Desea papas fritas? (si o no): ")
+  (define papas (equal? (read-line) "si"))
+  (display "¿Desea refresco? (si o no): ")
+  (define refresco (equal? (read-line) "si"))
+  (display "¿Desea agregar queso? (si o no): ")
+  (define queso (equal? (read-line) "si"))
+  (display "¿Desea agregar tocino? (si o no): ")
+  (define tocino (equal? (read-line) "si"))
+  (display "Ingrese la cantidad de hamburguesas: ")
+  (define cantidad (read))
+
+  (define precio-base (calcular-precio-hamburguesa tipo))
+  (define precio-adicionales (calcular-precio-adicionales papas refresco queso tocino))
+  (define subtotal (* (+ precio-base precio-adicionales) cantidad))
+  (define descuento (calcular-descuento cantidad subtotal))
+  (define total (- subtotal descuento))
+
+  (display "Precio base: ") (displayln precio-base)
+  (display "Precio adicionales: ") (displayln precio-adicionales)
+  (display "Subtotal: ") (displayln subtotal)
+  (display "Descuento: ") (displayln descuento)
+  (display "Total: ") (displayln total))
 
 (main)
 
 
 
+;  El IMSS requiere clasificar a las personas que se jubilaron en el año de 1997. 
+;  Existen tres tipos de jubilaciones: por edad, por antigüedad joven,por 
+;  antigüedad adulta y por sexo. Las mujeres adscritas a la jubilación por edad deben
+;   tener 50 años o más y una antigüedad en su empleo de menos de 25 años y los
+;    hombres deben tener  entre 60 y 70 años y una antigüedad de menos de 30 años. 
+;    Las personas adscritas a la jubilación por antigüedad joven deben tener menos de
+;     60 años y una antigüedad en su empleo de 25 años o más. Las mujeres adscritas 
+;     a la jubilación por antigüedad adulta deben tener 60 años o más y una antigüedad
+;      en su empleo de 25 años o más y los hombres deben ser mayores a 65 años y una
+;       antigüedad de más de 30 años. Determinar en qué tipo de jubilación, quedará adscrita
+;        una persona.Realizar este programa con una sola función
+
+; Ejercicio 11 b
 
 ;#12 Ej 1
 (define T1L1 20)(define T1L2 12)(define T1L3 13)
@@ -664,6 +824,72 @@
   )
 (principal)
 
+
+; Diseñe un algoritmo que lea tres longitudes y determine si forman o no un triángulo. 
+; Si es un triángulo determine de que tipo de triángulo se trata entre: equilátero
+;  (si tiene tres lados iguales), isósceles (si tiene dos lados iguales) o escaleno 
+;  (si tiene tres lados desiguales). Considere que para formar un triángulo se requiere 
+;  que: "el lado mayor sea menor que la suma de los otros dos lados".
+; Y calcular el Área mediante heron 
+
+
+;#12 Ej 2
+(define (mayor_3 a b c)
+  (if (and(> a b)(> a c))
+      a
+      (if (and (> b a)(> b c))
+          b
+          c
+          )
+      )
+  )
+(define (dos_menores a b c)
+  (if (and (> a b)(> a c))
+      (+ b c)
+      (if (and(> b a)(> b c))
+          (+ a c)
+          (+ a b)
+          )
+      )
+  )
+(define (es_triangulo a b c)
+  (if (> (dos_menores a b c)(mayor_3 a b c))
+      (tipo_triangulo a b c)
+      "No es un triangulo"
+      )
+  )
+(define (tipo_triangulo a b c)
+  (if (= a b c)
+      "El triangulo es equilatero"
+      (if (or(= a b)(= a c)(= b c))
+          "El triangulo es isoleces"
+          "El triangulo es escaleno"
+          )
+      )
+  )
+(define (principal)
+  (displayln "Ingrese la primera longitud")
+  (define L1 (read))
+  (displayln "Ingrese la segunda longitud")
+  (define L2 (read))
+  (displayln "Ingrese la tercera longiutd")
+  (define L3 (read))
+  (es_triangulo L1 L2 L3)
+  )
+(principal)
+
+; Problema 1: 
+; Calcular el precio de un terreno triangular, uno cuadrado y otro rectangular se
+;  tiene la base y la altura de esas figuras, y el precio del metro cuadrado, 
+;  si el terreno tiene mas de 425 metros cuadrados  se le hará un descuento del 15%,
+;   si tiene mas de 675 metros cuadrados se le podrá hacer un descuento del 30 % y su tiene mas de
+;    1200 metros cuadrados se la hara un descuento del 40%
+; Que le muestre al usuario de menor a mayor precio
+; (formula del area del triangulo es base por altura partido por 2)
+; (El área del cuadrado es igual a lado por lado.)
+; (Para calcular el área de un rectángulo multiplicamos el largo por el ancho.)
+
+
 ;#13 Ej 1
 (define precio 1000)
 (define BaseT 60)(define AlturaT 90)
@@ -709,6 +935,63 @@
   (menor_3 (descuento (A_triangulo BaseT AlturaT))(descuento (A_cuadrado LadoC))(descuento (A_rectangulo BaseR AlturaR)))
   )
 (principal)
+
+; Problema 2: 
+; La política de cobro de una compañía telefónica es:
+; Cuando se realiza una llamada, el cobro es por el tiempo que esta dura, de tal forma que los
+; primeros cinco minutos cuestan 1 euro, los siguientes tres, 80 céntimos, los siguientes dos minutos a 70 céntimos y a partir del décimo minuto, 50 céntimos.
+; Además, se carga un impuesto de 3% cuando es domingo, y si es otro día, en turno de mañana 15%
+; y en turno de tarde 10%.
+; Realiza un algoritmo para determinar cuánto debe pagar por cada concepto una persona que realiza 
+;una llamada.
+
+; Ejemplo: Supongamos que Juan realizó una llamada telefónica el martes a las 11:30 am que apareció
+; 15 minutos. El costo de la llamada se calcularía de la siguiente manera:
+; Los primeros 5 minutos: 5 minutos x 1 euro por minuto = 5 euros
+; Los siguientes 3 minutos: 3 minutos x 0,80 euros por minuto = 2,40 euros
+
+
+; Los siguientes 2 minutos: 2 minutos x 0,70 euros por minuto = 1,40 euros
+; Los siguientes 5 minutos: 5 minutos x 0,50 euros por minuto = 2,50 euros
+; El costo total de la llamada sin impuestos sería de: 5 euros + 2,40 euros + 1,40 euros + 2,50 euros 
+;= 11,30 euros.
+; Sin embargo, como la llamada se realizó un martes en la mañana, se aplicaría un impuesto del 15%,
+; por lo que el costo total de la llamada sería de: 11,30 euros + (11,30 euros x 0,15) = 12.995 euros.
+
+
+;#13 Ej 2
+; Funciones auxiliares
+(define (calcular-costo-llamada duracion)
+  (+ (if (> duracion 0) (* (if (> duracion 5) 5 duracion) 1) 0)
+     (* (if (> duracion 5) (if (> duracion 8) 3 (- duracion 5)) 0) 0.8)
+     (* (if (> duracion 8) (if (> duracion 10) 2 (- duracion 8)) 0) 0.7)
+     (* (if (> duracion 10) (- duracion 10) 0) 0.5)))
+
+(define (calcular-impuesto dia turno)
+  (if (equal? dia "domingo")
+      0.03
+      (if (equal? turno "mañana")
+          0.15
+          (if (equal? turno "tarde") 0.10 0))))
+
+; Función principal
+(define (main)
+  (display "Ingrese la duración de la llamada en minutos: ")
+  (define duracion (read))
+  (display "Ingrese el día de la semana (lunes, martes, ..., domingo): ")
+  (define dia (read))
+  (display "Ingrese el turno (mañana, tarde): ")
+  (define turno (read))
+
+  (define costo-sin-impuestos (calcular-costo-llamada duracion))
+  (define impuesto (calcular-impuesto dia turno))
+  (define total (+ costo-sin-impuestos (* costo-sin-impuestos impuesto)))
+
+  (display "Costo sin impuestos: ") (displayln costo-sin-impuestos)
+  (display "Impuesto: ") (display (* impuesto 100)) (displayln "%")
+  (display "Total: ") (displayln total))
+
+(main)
 
 ;#14 Ej 1
 (define (total a b)
@@ -922,6 +1205,37 @@
   )
 (principal)
 
+; Problema 2:  La asociación de vinicultores tiene como política fijar un precio inicial al
+;  kilo de uva, la cual se clasifica en tipos (A y B), y además en tamaños (1 y 2). Cuando se realiza 
+;  la venta del producto, ésta es de un sólo tipo y tamaño, se requiere determinar cuanto recibirá un
+;   productor por la uva que entrega en un embarque considerando lo siguiente:
+; * Si es de tipo A, se le cargan 20 céntimos al precio inicial cuando es de tamaño 1 y 30 céntimos si es de tamaño 2.
+; * Si es de tipo B, se rebajan 30 céntimos cuando es de tamaño 1, y 50 céntimos cuando es de tamaño 2.
+
+; ejercicios 15 b
+(define KgUva 2.50)
+
+(define (ganancia tipo tamaño kg)
+  (if (equal? tipo "A")
+      (if (= tamaño 1)
+          (* kg (+ KgUva 0.20))
+          (* kg (+ KgUva 0.30)))
+      (if (= tamaño 1)
+          (* kg (- KgUva 0.30))
+          (* kg (- KgUva 0.50)))))
+
+(define (principal)
+  (display "Ingrese la cantidad de kilogramos: ")
+  (define kg (read))
+  (display "Ingrese el tipo de uva, A o B, entre comillas: ")
+  (define tipo (read))
+  (display "Ingrese el tamaño de la uva, 1 o 2: ")
+  (define tamaño (read))
+  (display "En total recibirá: ")
+  (display (ganancia tipo tamaño kg)))
+
+(principal)
+
 ;#16 Ej 1
 (define (descuento a b p)
   (if (and(>= a 30)(< a 35))
@@ -966,6 +1280,56 @@
   (displayln "Ingrese el valor total de la compra")
   (define V (read))
   (descuento T M V)
+  )
+(principal)
+
+; 1.En una empresa de ventas, se necesita un programa en Racket que calcule la comisión que se le debe 
+; pagar a un vendedor en función de sus ventas mensuales, pero la comisión no siempre
+;  se calcula de la misma forma. Si las ventas del vendedor son menores a $10,000,
+;   no se le otorgará ninguna comisión. Si las ventas están entre $10,000 y $20,000,
+;    la comisión será del 5% de las ventas. Si las ventas son mayores a $20,000,
+;     pero menores a $50,000, la comisión será del 10% de las ventas. 
+;     Si las ventas son mayores a $50,000, la comisión será del 15% de las ventas. 
+;     Sin embargo, si el vendedor ha vendido más de $100,000 en el último trimestre, 
+;     se le otorgará una comisión adicional del 5% de sus ventas mensuales. Escribe una 
+;     función en Racket que tome el monto de ventas mensuales del vendedor y el 
+;     monto de sus ventas en el último trimestre como entrada y devuelva el monto 
+;     de comisión que se le debe pagar. Si el vendedor no ha vendido nada en el 
+;     último trimestre, se le otorgará una comisión normal según su nivel de ventas mensuales.
+
+
+;#ekercicio 17 a
+
+(define (comision V)
+  (if (< V 10000)
+      0
+      (if (and(> V 10000)(< V 20000))
+          (* V 0.05)
+          (if (and (> V 20000)(< V 50000))
+              (* V 0.10)
+              (if (> V 50000)
+                  (* V 0.15)
+                  )
+              )
+          )
+      )
+  )
+(define (trimestre T)
+  (if (> T 100000)
+      (* T 0.05)
+      0
+      )
+  )
+(define (total a b)
+  (+ a b)
+  )
+(define (principal)
+  (displayln "Ingrese las ventas del ultimo mes")
+  (define V (read))
+  (displayln "Ingrese sus ventas trimestrales")
+  (define T (read))
+  (displayln "En total gano la siguiente cantidad de dolares por comisiones")
+  (total (comision V)(trimestre T))
   )
 (principal)
 
@@ -1022,3 +1386,92 @@
   (descomposicion n)
   )
 (principal)
+
+
+; .En una empresa de logística, se necesita un programa en Racket que calcule el costo de envío de 
+; un paquete en función de su peso y su destino. Si el peso del paquete es menor a 1 kg, el costo será 
+; de $5. Si el peso está entre 1 kg y 5 kg, el costo será de $10. Si el peso está entre
+;  5 kg y 20 kg, el costo será de $20. Si el peso es mayor a 20 kg, se debe aplicar 
+;  un costo adicional de $2 por cada kg extra. Además, si el destino del
+;   paquete es una ciudad en el extranjero, se debe agregar un costo adicional del 50% al costo total.
+;    Escribe una función en Racket que tome el peso del paquete y su destino como entrada y devuelva el costo total de envío.
+
+;ejercicio 17 b
+(define (calcular-costo-base peso)
+  (if (< peso 1)
+      5
+      (if (and (>= peso 1) (< peso 5))
+          10
+          (if (and (>= peso 5) (< peso 20))
+              20
+              (* 2 (- peso 20))))))
+
+(define (calcular-costo-adicional peso)
+  (if (> peso 20)
+      (* 2 (- peso 20))
+      0))
+
+(define (calcular-costo-envio peso destino)
+  (if (equal? destino "extranjero")
+      (+ (calcular-costo-base peso) (calcular-costo-adicional peso) (* 0.5 (+ (calcular-costo-base peso) (calcular-costo-adicional peso))))
+      (+ (calcular-costo-base peso) (calcular-costo-adicional peso))))
+
+(define (main)
+  (display "Ingrese el peso del paquete (en kg): ")
+  (define peso (read))
+  (display "Ingrese el destino (local o extranjero): ")
+  (define destino (read))
+  (display "El costo total de envío es: $")
+  (display (calcular-costo-envio peso destino)))
+
+(main)
+
+
+; Problema 1: Una compañía dedicada al alquiler de automóviles cobra un monto fijo de $300000 para los 
+; primeros 300 km de recorrido. Para más de 300 km y hasta 1000 km, cobra un monto adicional de $15.000
+;  por cada kilómetro en exceso sobre 300. Para más de 1000 km cobra un monto adicional de $10.000 por 
+;  cada kilómetro en exceso sobre 1000. Los precios ya incluyen el 20% del impuesto general a las ventas,
+;   IVA. Diseñe un algoritmo que determine el monto a pagar por el alquiler de un vehículo y el monto 
+;   incluido del impuesto.
+; Ejemplo: Un automóvil recorrió 780 km. Se sabe que se tiene un monto fijo de $300000
+;  y que si el automóvil recorre entre 300 km y 1000 km, el cual es el caso, se hace
+;   un cobro adicional de $15000 por cada km en exceso sobre 300. Para conocer
+;    los km en exceso, restamos los km recorridos y los km base, entonces serían
+;     $300000 sumado los km en exceso multiplicados los $15000 de monto 
+;     adicional. $300000+($15000*480 km), los que nos dan un total de $7500000. 
+;     Ahora para conocer el valor del impuesto, tendremos que sacar el 20% del total,
+;      lo que sería $7500000*0,2, es igual a $1500000. Y por último, para el monto incluido 
+;      del impuesto, sumaremos el total dado anteriormente con el valor del impuesto,
+;       por lo tanto $7500000+1500000, nos da un monto total de $9000000.
+
+;#22 Ej 1
+
+(define (calcular-monto km)
+  (if (<= km 300)
+      300000
+      (if (<= km 1000)
+          (+ 300000 (* 15000 (- km 300)))
+          (+ 300000 (* 15000 (- 1000 300)) (* 10000 (- km 1000))))))
+
+(define (calcular-impuesto monto)
+  (* monto 0.2))
+
+(define (calcular-monto-con-impuesto monto impuesto)
+  (+ monto impuesto))
+
+(define (main)
+  (display "Ingrese la cantidad de kilómetros recorridos: ")
+  (define km (read))
+  (define monto (calcular-monto km))
+  (define impuesto (calcular-impuesto monto))
+  (define monto-con-impuesto (calcular-monto-con-impuesto monto impuesto))
+  (display "Monto a pagar: ")
+  (displayln monto)
+  (display "Impuesto incluido: ")
+  (displayln impuesto)
+  (display "Monto total a pagar (incluido impuesto): ")
+  (displayln monto-con-impuesto))
+
+(main)
+
+
