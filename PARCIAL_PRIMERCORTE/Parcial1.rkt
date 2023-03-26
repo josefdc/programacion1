@@ -209,23 +209,20 @@
 
 ;#6 Ej 1
 (define precio 2000)
-(define (areaTrap a b c)
-  (*(/(+ a b)2)c)
-  )
+
+(define (Area-trapecio a b c)
+  (* (/ (+ a b) 2) c))
+
 (define (descuento a)
-  [if (<= a 100)
+  (if (<= a 100)
       a
-      [if (and (> a 100)(<= a 300))
+      (if (and (> a 100) (<= a 300))
           (* (* a 0.85) precio)
-          [if (and(> a 300)(<= a 700))
-              (( a 0.80) precio)
-              [if (> a 700)
-                  (( a 0.70) precio)
-                  ]
-              ]
-          ]
-      ]
-  )
+          (if (and (> a 300) (<= a 700))
+              ((a 0.80) precio)
+              (if (> a 700)
+                  ((a 0.70) precio))))))
+  
 (define (principal)
   (display "Ingrese la base mayor de la figura")
   (define B (read))
@@ -234,9 +231,10 @@
   (display "Ingrese la altura de la figura")
   (define h (read))
   (display "El valor a pagar con descuento es")
-  (descuento (areaTrap B b h))
-  )
+  (descuento (Area-trapecio B b h)))
+  
 (principal)
+
 ; Problema 2. 
 ; Un programa que reciba 5 números, elimine los dos números más pequeños, eleve el más grande a la 2, sume los dos restantes y luego los multiplique.
 ; Ejemplo 1: 
@@ -252,13 +250,13 @@
 
 ;#6 Ej2
 (define (menor_5 a b c d e)
-  (if (and (< a b)(< a c)(< a d)(< a e))
+  (if (and (< a b) (< a c) (< a d) (< a e))
       (menor_4 b c d e)
-      (if (and(< b a)(< b c)(< b d)(< b e))
+      (if (and (< b a) (< b c) (< b d) (< b e))
           (menor_4 a c d e)
-          (if (and(< c a)(< c b)(< c d)(< c e))
+          (if (and (< c a) (< c b) (< c d) (< c e))
               (menor_4 a b d e)
-              (if (and(< d a)(< d b)(< d c)(< d e))
+              (if (and (< d a) (< d b) (< d c) (< d e))
                   (menor_4 a b c e)
                   (menor_4 a b c d)
                   )
@@ -266,27 +264,30 @@
           )
       )
   )
+
 (define (menor_4 a b c d)
-  [if (and (< a b)(< a c)(< a d))
+  (if (and (< a b) (< a c) (< a d))
       (mayor_3 b c d)
-      [if (and(< b a)(< b c)(< b d))
+      (if (and (< b a) (< b c) (< b d))
           (mayor_3 a c d)
-          [if (and (< c a)(< c b)(< c d))
+          (if (and (< c a) (< c b) (< c d))
               (mayor_3 a b d)
               (mayor_3 a b c)
-              ]
-          ]
-      ]
-  )
-(define (mayor_3 a b c)
-  (if (and (> a b)(> a c))
-      (* (sqr a)(+ b c))
-      [if (and(> b a)(> b c))
-          (* (sqr b)(+ a c))
-          (* (sqr c)(+ a b))
-          ]
+              )
+          )
       )
   )
+
+(define (mayor_3 a b c)
+  (if (and (> a b) (> a c))
+      (* (sqr a) (+ b c))
+      (if (and (> b a) (> b c))
+          (* (sqr b) (+ a c))
+          (* (sqr c) (+ a b))
+          )
+      )
+  )
+
 (define (principal)
   (displayln "Ingrese 5 numeros diferentes separados por espacios")
   (define N1 (read))
@@ -295,9 +296,11 @@
   (define N4 (read))
   (define N5 (read))
   (displayln "El resultado es ")
-  (menor_5 N1 N2 N3 N4 N5)
+  (displayln (menor_5 N1 N2 N3 N4 N5))
   )
+
 (principal)
+
 
 ; Problema 1. En un grupo de programación se hacen 5 pruebas las cuales el profesor obtiene 5 notas. En vista de las muy buenas notas que obtuvieron los estudiantes el profesor decide que la nota se calculará así:
 ; 1: Eliminar la menor de las 5 notas.
@@ -569,15 +572,20 @@
 (define (IMC a b)
   (/ a (sqr b))
   )
+
 (define (saludable a)
-  [if (and(> a 18.5)(< a 24.9))
-      "Su peso es saludable"
-      [if (and(> a 25.0)(< a 29.9))
-          "Usted está en sobrepeso"
-          "Usted está en el rango de obesidad"
-          ]
-      ]
+  (if (> a 18.5)
+      (if (< a 24.9)
+          "Su peso es saludable"
+          (if (< a 29.9)
+              "Usted está en sobrepeso"
+              "Usted está en el rango de obesidad"
+              )
+          )
+      "Usted está en el rango de infrapeso"
+      )
   )
+
 (define (principal)
   (display "Ingrese su peso en Kilogramos")
   (define Kg (read))
@@ -586,9 +594,11 @@
   (display "Su IMC es ")
   (display (IMC Kg M))
   (display ", esto quiere decir que ")
-  (saludable (IMC Kg M))
+  (display (saludable (IMC Kg M)))
   )
+
 (principal)
+
 
 ; Problema 1
 
@@ -609,40 +619,41 @@
 
 ;#9 Ej 1
 (define (impuesto a b)
-  [if (<= a 100)
-      [if (= b 1)
+  (if (<= a 100)
+      (if (= b 1)
           (+ a (* a 0.07))
-          [if (= b 2)
+          (if (= b 2)
               (+ a (* a 0.08))
-              [if (= b 3)
+              (if (= b 3)
                   (+ a (* a 0.09))
-                  ]
-              ]
-          ]
-      [if (and(> a 100)(<= a 500))
-          [if (= b 1)
+                  )
+              )
+          )
+      (if (and (> a 100) (<= a 500))
+          (if (= b 1)
               (+ a (* a 0.12))
-              [if (= b 2)
+              (if (= b 2)
                   (+ a (* a 0.13))
-                  [if (= b 3)
+                  (if (= b 3)
                       (+ a (* a 0.14))
-                      ]
-                  ]
-              ]
-          [if (> a 500)
-              [if (= b 1)
+                      )
+                  )
+              )
+          (if (> a 500)
+              (if (= b 1)
                   (+ a (* a 0.17))
-                  [if (= b 2)
+                  (if (= b 2)
                       (+ a (* a 0.18))
-                      [if (= b 3)
+                      (if (= b 3)
                           (+ a (* a 0.19))
-                          ]
-                      ]
-                  ]
-              ]
-          ]
-      ]
+                          )
+                      )
+                  )
+              )
+          )
+      )
   )
+
 (define (principal)
   (display "Ingrese el precio del producto")
   (define Precio (read))
@@ -651,7 +662,9 @@
   (display "El impuesto que debe pagar de acuerdo con el precio del producto y la ciudad es ")
   (impuesto Precio Ciudad)
   )
+
 (principal)
+
 
 ; Una empresa quiere hacer una compra de varias piezas de la misma clase a una fábrica 
 ; de refacciones. La empresa, dependiendo del monto total de la compra, decidirá qué hacer
