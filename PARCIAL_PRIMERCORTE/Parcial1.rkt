@@ -993,7 +993,159 @@
 
 (main)
 
+; Problema 1 ,
+; en un concurso de una tienda de ropa, el total de la compra se calcula de la siguiente manera,
+; si lleva los 5 productos (pantalones, camisas, correa, sudaderas, buzos)
+; * el precio mayor del total de los productos de un artículo tendrá un descuento del 50%
+; * el precio menor del total de los productos de un artículo no tendrá descuento
+; * los tres valores restantes tendrán un descuento del 6%
+; elabore un programa que pueda determinar el precio que deba pagar el cliente, teniendo en
+; cuenta si lleva los 5 productos o no
+; Ejemplo 1
+; un cliente compró 6 pantalones, precio $100 cada uno, 7 camisas, $70 cada una, 5 correas,
+; $30 cada uno, 8 sudaderas $150 cada uno, 7 buzos, $100 cada uno, en este caso el precio
+; mayor sería las 8 sudaderas * 150 =1.200, a ese valor se le aplica un 50%de descuento, al
+; precio menor que serían las correas, 5*30=150, a este valor no se le aplica ningún
+; descuentos, y los tres valores restantes, que serían los pantalones (6*100)camisas(7*70),
+; buzos (7*100), se les aplicaría un descuento del 6% a cada uno. El programa debe calcular la
+; sumatoria de todo esto con los descuentos correspondientes. Que daría un total de $2432.6
+; Ejemplo 2
+; Un cliente compra 2 pantalones, precio $100 cada uno, 4 camisas $70 cada uno, 2
+; sudaderas, $150 cada uno. En este caso no aplicaría ningún tipo de descuento porque no
+; cumple con las condiciones dadas, de que debe llevar mínimo 5 productos. En este caso el
+; programa debería solo sumar los valores de los totales de cada producto y determinar el
+; precio total. Que vendría siendo $780. (primero se tendría que multiplicar la cantidad de
+; artículos por el precio de cada producto, para determinar el valor total de cada producto,
+; seguido de esto sumamos cada valor total para así generar el valor total de la compra).
+; Ejemplo 2
+; El estudiante Carlos Mario Marin cuenta con un sisben tipo 2, y un estrato 1, pero el se encuentra
+; laborando en una empresa, como solo cumple con los dos primeros requisitos se le va hacer un descuento
+;  del 25% al cargo fijo que son $1.200.000. El total que él debería pagar por la matrícula es de $900.000.  
+;  El programa debería pedir el nombre de la estudiante, el sisben, el estrato y si está laborando o no
+;   (donde el usuario diga “si” o “no”).
+
+; Ejemplo 3
+; Sofia Jaramillo, cuenta con un sisben tipo 2, un estrato 4, y no se encuentra laborando, a ella no
+;  se le podría aplicar ningún tipo de descuento, debido a que no cumple con el requisito del estrato,
+;   (solo hay una excepción cuando no se cumple uno de los tres requisitos, que es cuando se encuentra
+;    laborando, como ella no cumple con el estrato no hay descuento)
+;     Por lo tanto el valor de la matrícula es de 1.200.000.
+
+; Ejemplo 4
+; Luisa Rivera no tiene sisben(0), es estrato 4, y está trabajando, ella tampoco aplicaría descuento porque no cumple con ningún requisito, por lo tanto el valor de la matrícula es de $1.200.000.
+
 ;#14 Ej 1
+
+; Función para calcular el total de una compra
+(define (total a b)
+  (* a b)
+)
+
+; Función para aplicar descuentos según la cantidad de productos y sus precios
+(define (descuentos p a b c d f)
+  (if (= p 5) ; Si lleva los 5 productos
+      ; Comparamos los precios de cada artículo para determinar cuál es el mayor y cuál es el menor
+      ; Aplicamos descuentos según las reglas dadas (50% al mayor, 0% al menor y 6% a los tres restantes)
+    (if(and(and(> a b)(> a c))(and(> a d)(> a f)))
+        (if(and(and(< b a)(< b c))(and(< b d)(< b f)))
+                 (+ (- a(* a 0.5))(- c (* c 0.06))(- d (* d 0.06))(- f (* f 0.06))(- b (* b 0)))
+                 
+         (if(and(and(< c a)(< c b))(and(< c d)(< c f)))
+             (+ (- a(* a 0.5))(- b (* b 0.06))(- d (* d 0.06))(- f (* f 0.06))(- c (* c 0)))
+             
+             (if(and(and(< d a)(< d b))(and(< d c)(< d f)))
+                 (+ (- a(* a 0.5))(- b (* b 0.06))(- c (* c 0.06))(- f (* f 0.06))(- d (* d 0)))
+
+                  (if(and(and(< f a)(< f b))(and(< f c)(< f d)))
+                     (+ (- a(* a 0.5))(- b (* b 0.06))(- c (* c 0.06))(- d (* d 0.06))(- f (* f 0)))
+                     )
+                  )
+             )
+         )
+        
+     
+      (if(and(and(> b a)(> b c))(and(> b d)(> b f)))
+         (if(and(and(< a b)(< a c))(and(< a d)(< a f)))
+            (+ (- b(* b 0.5))(- c (* c 0.06))(- d (* d 0.06))(- f (* f 0.06))(- a (* a 0)))
+
+            (if(and(and(< c a)(< c b))(and(< c d)(< c f)))
+                (+ (- b(* b 0.5))(- a (* a 0.06))(- d (* d 0.06))(- f (* f 0.06))(- c (* c 0)))
+
+                (if(and(and(< d a)(< d b))(and(< d c)(< d f)))
+                   (+ (- b(* b 0.5))(- a (* a 0.06))(- c (* c 0.06))(- f (* f 0.06))(- d (* d 0)))
+
+                   (if(and(and(< f a)(< f b))(and(< f c)(< f d)))
+                      (+ (- b(* b 0.5))(- a (* a 0.06))(- c (* c 0.06))(- d (* d 0.06))(- f (* f 0)))
+                      )
+                   )
+                )
+            )
+
+         (if(and(and(> c a)(> c b))(and(> c d)(> c f)))
+            (if(and(and(< a b)(< a c))(and(< a d)(< a f)))
+                (+ (- c(* c 0.5))(- b (* b 0.06))(- d (* d 0.06))(- f (* f 0.06))(- a (* a 0)))
+
+                (if(and(and(< b a)(< b c))(and(< b d)(< b f)))
+                 (+ (- c(* c 0.5))(- a (* a 0.06))(- d (* d 0.06))(- f (* f 0.06))(- b (* b 0)))
+
+                 (if(and(and(< d a)(< d b))(and(< d c)(< d f)))
+                   (+ (- c(* c 0.5))(- a (* a 0.06))(- b (* b 0.06))(- f (* f 0.06))(- d (* d 0)))
+
+                   (if(and(and(< f a)(< f b))(and(< f c)(< f d)))
+                      (+ (- c(* c 0.5))(- a (* a 0.06))(- b (* b 0.06))(- d (* d 0.06))(- f (* f 0)))
+                    )
+                   )
+                 )
+                )
+
+             (if(and(and(> d a)(> d b))(and(> d c)(> d f)))
+                (if(and(and(< a b)(< a c))(and(< a d)(< a f)))
+                (+ (- d(* d 0.5))(- b (* b 0.06))(- c (* c 0.06))(- f (* f 0.06))(- a (* a 0)))
+
+                (if(and(and(< b a)(< b c))(and(< b d)(< b f)))
+                 (+ (- d(* d 0.5))(- a (* a 0.06))(- c (* c 0.06))(- f (* f 0.06))(- b (* b 0)))
+
+                 (if(and(and(< c a)(< c b))(and(< c d)(< c f)))
+                (+ (- d(* d 0.5))(- a (* a 0.06))(- b (* b 0.06))(- f (* f 0.06))(- c (* c 0)))
+
+                (if(and(and(< f a)(< f b))(and(< f c)(< f d)))
+                      (+ (- d(* d 0.5))(- a (* a 0.06))(- b (* b 0.06))(- c (* c 0.06))(- f (* f 0)))
+                    )
+                )
+                 )
+                )
+
+                (if(and(and(> f a)(> f b))(and(> f c)(> f d)))
+                    (if(and(and(< a b)(< a c))(and(< a d)(< a f)))
+                (+ (- f(* f 0.5))(- b (* b 0.06))(- c (* c 0.06))(- d (* d 0.06))(- a (* a 0)))
+
+                (if(and(and(< b a)(< b c))(and(< b d)(< b f)))
+                 (+ (- f(* f 0.5))(- a (* a 0.06))(- c (* c 0.06))(- d (* d 0.06))(- b (* b 0)))
+                 
+                  (if(and(and(< c a)(< c b))(and(< c d)(< c f)))
+                (+ (- f(* f 0.5))(- a (* a 0.06))(- b (* b 0.06))(- d (* d 0.06))(- c (* c 0)))
+
+                (if(and(and(< d a)(< d b))(and(< d c)(< d f)))
+                   (+ (- f(* f 0.5))(- a (* a 0.06))(- b (* b 0.06))(- c (* c 0.06))(- d (* d 0)))
+
+                )
+                )
+                  )
+                )
+                    )
+                )
+             )
+         )
+      )
+
+      
+      ; Si no lleva los 5 productos
+      (if (< p 5)
+          ; Retornamos la suma de los precios sin descuentos
+          (+ a b c d f)
+      )
+  )
+)
 (define (total a b)
   (* a b)
   )
@@ -1473,5 +1625,4 @@
   (displayln monto-con-impuesto))
 
 (main)
-
 
