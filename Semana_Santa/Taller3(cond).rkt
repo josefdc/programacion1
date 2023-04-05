@@ -158,7 +158,7 @@
   (newline))
 
 
-;------6------
+;------7------
 ; Elaborar un menu que calcule tres conversiones de tiempo
 ; 1. De segundos a minutos
 ; 2. De minutos a horas
@@ -200,4 +200,141 @@
      (display "La cantidad de días es: ")
      (displayln (horas-dias horas))]
     [else (error "Opción desconocida")]))
+
+;------8------
+; Elaborar un menu que calcule tres conversiones, del sistema ingles
+; al decimal (unidades de longitud)
+; 1. De yardas a metros
+; 2. De pies a metros
+; 3. De pulgadas a metros
+
+; Función para convertir yardas a metros
+(define (yardas-metros yardas)
+  (* yardas 0.9144))
+
+; Función para convertir pies a metros
+(define (pies-metros pies)
+  (* pies 0.3048))
+
+; Función para convertir pulgadas a metros
+(define (pulgadas-metros pulgadas)
+  (* pulgadas 0.0254))
+
+; Función principal
+(define (principal)
+  (display "Ingrese una opción: ")
+  (displayln "1. De yardas a metros")
+  (displayln "2. De pies a metros")
+  (displayln "3. De pulgadas a metros")
+  (define opcion (read))
+  (cond
+    [(= opcion 1)
+     (display "Ingrese la cantidad de yardas: ")
+     (define yardas (read))
+     (display "La cantidad de metros es: ")
+     (displayln (yardas-metros yardas))]
+    [(= opcion 2)
+     (display "Ingrese la cantidad de pies: ")
+     (define pies (read))
+     (display "La cantidad de metros es: ")
+     (displayln (pies-metros pies))]
+    [(= opcion 3)
+     (display "Ingrese la cantidad de pulgadas: ")
+     (define pulgadas (read))
+     (display "La cantidad de metros es: ")
+     (displayln (pulgadas-metros pulgadas))]
+    [else (error "Opción desconocida")]))
+
+;------9------
+; Elaborar un menu que calcule conversion de divisas, pesos a dolares, pesos a euros,
+; pesos a libras, libras a pesos, dolares a pesos, euros a pesos
+
+; Función para convertir pesos a dólares
+(define (pesos-dolares pesos)
+  (/ pesos 4500))
+
+; Función para convertir pesos a euros
+(define (pesos-euros pesos)
+  (/ pesos 5000))
+
+; Función para convertir pesos a libras
+(define (pesos-libras pesos)
+  (/ pesos 6000))
+
+; Función para convertir libras a pesos
+(define (libras-pesos libras)
+  (* libras 6000))
+
+; Función para convertir dólares a pesos
+(define (dolares-pesos dolares)
+  (* dolares 4500))
+
+; Función para convertir euros a pesos
+(define (euros-pesos euros)
+  (* euros 5000))
+
+; Función principal
+(define (principal)
+  (display "Ingrese una opción: ")
+  (displayln "1. De pesos a dólares")
+  (displayln "2. De pesos a euros")
+  (displayln "3. De pesos a libras")
+  (displayln "4. De libras a pesos")
+  (displayln "5. De dólares a pesos")
+  (displayln "6. De euros a pesos")
+  (define opcion (read))
+  (cond
+    [(= opcion 1)
+     (display "Ingrese la cantidad de pesos: ")
+     (define pesos (read))
+     (display "La cantidad de dólares es: ")
+     (displayln (pesos-dolares pesos))]
+    [(= opcion 2)
+     (display "Ingrese la cantidad de pesos: ")
+     (define pesos (read))
+     (display "La cantidad de euros es: ")
+     (displayln (pesos-euros pesos))]
+    [(= opcion 3)
+     (display "Ingrese la cantidad de pesos: ")
+     (define pesos (read))
+     (display "La cantidad de libras es: ")
+     (displayln (pesos-libras pesos))]
+    [(= opcion 4)
+     (display "Ingrese la cantidad de libras: ")
+     (define libras (read))
+     (display "La cantidad de pesos es: ")
+     (displayln (libras-pesos libras))]
+    [(= opcion 5)
+     (display "Ingrese la cantidad de dólares: ")
+     (define dolares (read))
+     (display "La cantidad de pesos es: ")
+     (displayln (dolares-pesos dolares))]
+    [(= opcion 6)
+     (display "Ingrese la cantidad de euros: ")
+     (define euros (read))
+     (display "La cantidad de pesos es: ")
+     (displayln (euros-pesos euros))]
+    [else (error "Opción desconocida")]))
+
+;------10------
+; imprimir la cantidad correspondiente a una cantidad de hasta cuatro digitos dada
+
+; Función para imprimir los dígitos de un número
+(define (imprimir-digitos numero)
+  (cond
+    [(< numero 10)
+     (display numero)]
+    [else
+     (imprimir-digitos (/ numero 10))
+     (display " ")
+     (display (modulo numero 10))]))
+
+; Función principal
+(define (principal)
+  (display "Ingrese un número: ")
+  (define numero (read))
+  (imprimir-digitos numero))
+
+;------11------
+;Investigar el hor
 
