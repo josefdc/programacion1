@@ -28,7 +28,6 @@
 ; Capturar una letra minuscula o mayuscula e imprimir la poscion que ocupa en el abecedario.
 ; ejemplo a=1 b=2 c=3 ... z=26
 
-
 (define (leer-letra)
   (read-char))
 
@@ -156,7 +155,36 @@
     [(char-curva-recta letra) (display "curva y recta")]
     [else (display "desconocida")])
   (newline))
+;------6------
+;Leer un caracter y dos numeros enteros, si el caracter es un operaddr (+,-,*,/) realizar la operación
+; si no mostrar un mensaje de error.
 
+; Función para leer un caracter
+(define (leer-caracter)
+  (read))
+
+; Función para leer un número entero
+(define (leer-numero)
+  (read))
+
+; Función para realizar la operación
+(define (operacion caracter numero1 numero2)
+  (cond
+    [(char=? caracter #\+) (+ numero1 numero2)]
+    [(char=? caracter #\-) (- numero1 numero2)]
+    [(char=? caracter #\*) (* numero1 numero2)]
+    [(char=? caracter #\/) (/ numero1 numero2)]
+    [else (error "Caracter desconocido")]))
+; Función principal
+(define (principal)
+  (display "Ingrese un caracter: ")
+  (define caracter (leer-caracter))
+  (display "Ingrese un número: ")
+  (define numero1 (leer-numero))
+  (display "Ingrese otro número: ")
+  (define numero2 (leer-numero))
+  (display "El resultado de la operación es: ")
+  (displayln (operacion caracter numero1 numero2)))
 
 ;------7------
 ; Elaborar un menu que calcule tres conversiones de tiempo
@@ -320,21 +348,144 @@
 ; imprimir la cantidad correspondiente a una cantidad de hasta cuatro digitos dada
 
 ; Función para imprimir los dígitos de un número
-(define (imprimir-digitos numero)
-  (cond
-    [(< numero 10)
-     (display numero)]
-    [else
-     (imprimir-digitos (/ numero 10))
-     (display " ")
-     (display (modulo numero 10))]))
 
-; Función principal
-(define (principal)
-  (display "Ingrese un número: ")
+(define (unidades n)
+  (cond
+    [(= n 0) ""]
+    [(= n 1) "uno"]
+    [(= n 2) "dos"]
+    [(= n 3) "tres"]
+    [(= n 4) "cuatro"]
+    [(= n 5) "cinco"]
+    [(= n 6) "seis"]
+    [(= n 7) "siete"]
+    [(= n 8) "ocho"]
+    [(= n 9) "nueve"]))
+
+(define (decenas n)
+  (cond
+    [(= n 0) ""]
+    [(= n 1) "diez"]
+    [(= n 2) "veinte"]
+    [(= n 3) "treinta"]
+    [(= n 4) "cuarenta"]
+    [(= n 5) "cincuenta"]
+    [(= n 6) "sesenta"]
+    [(= n 7) "setenta"]
+    [(= n 8) "ochenta"]
+    [(= n 9) "noventa"]))
+
+(define (centenas n)
+  (cond
+    [(= n 0) ""]
+    [(= n 1) "ciento"]
+    [(= n 5) "quinientos"]
+    [(= n 7) "setecientos"]
+    [(= n 9) "novecientos"]
+    [else (string-append (unidades n) "cientos")]))
+
+
+(define (miles n)
+  (cond
+    [(= n 1) "mil"]
+    [else (string-append (unidades n) " mil")]))
+
+(define (describir-numero n)
+  (cond
+    [(< n 10) (unidades n)]
+    [(< n 100) (string-append (decenas (quotient n 10)) " " (unidades (modulo n 10)))]
+    [(< n 1000) (string-append (centenas (quotient n 100)) " " (describir-numero (modulo n 100)))]
+    [else (string-append (miles (quotient n 1000)) " " (describir-numero (modulo n 1000)))]))
+
+(define (main)
+  (display "Ingrese un número de al menos 4 dígitos: ")
   (define numero (read))
-  (imprimir-digitos numero))
+  (if (< numero 1000)
+      (displayln "El número debe tener al menos 4 dígitos.")
+      (begin
+        (display "El número es: ")
+        (displayln (describir-numero numero)))))
+
+(main)
+
 
 ;------11------
-;Investigar el hor
+;Investigar el horoscopo chino y hacer el calculo correspondiente, cocnociendo 
+; el mes y el año de nacimiento
 
+
+(define (horoscopo-chino anio)
+  (cond
+    [(= (modulo (- anio 1900) 12) 0) "Rata"]
+    [(= (modulo (- anio 1900) 12) 1) "Buey"]
+    [(= (modulo (- anio 1900) 12) 2) "Tigre"]
+    [(= (modulo (- anio 1900) 12) 3) "Conejo"]
+    [(= (modulo (- anio 1900) 12) 4) "Dragón"]
+    [(= (modulo (- anio 1900) 12) 5) "Serpiente"]
+    [(= (modulo (- anio 1900) 12) 6) "Caballo"]
+    [(= (modulo (- anio 1900) 12) 7) "Cabra"]
+    [(= (modulo (- anio 1900) 12) 8) "Mono"]
+    [(= (modulo (- anio 1900) 12) 9) "Gallo"]
+    [(= (modulo (- anio 1900) 12) 10) "Perro"]
+    [(= (modulo (- anio 1900) 12) 11) "Cerdo"]
+    [else "Error"]))
+
+(define (main)
+  (display "Ingrese su año de nacimiento: ")
+  (define anio (read))
+  (display "Su signo del horóscopo chino es: ")
+  (displayln (horoscopo-chino anio)))
+
+(main)
+
+
+
+;------12------
+; Leer metros o centimetros y posteriormente seleccionar la opcion de conversion
+; de longitud al sistema ingles: yardas, pies, pulgadas , al final mostrar el resultado
+
+; Función para convertir metros a yardas
+(define (metros-yardas metros)
+  (/ metros 0.9144))
+
+; Función para convertir metros a pies
+(define (metros-pies metros)
+  (/ metros 0.3048))
+
+; Función para convertir metros a pulgadas
+(define (metros-pulgadas metros)
+  (/ metros 0.0254))
+
+; Función para convertir centímetros a yardas
+(define (centimetros-yardas centimetros)
+  (/ centimetros 91.44))
+
+; Función para convertir centímetros a pies
+(define (centimetros-pies centimetros)
+  (/ centimetros 30.48))
+
+; Función para convertir centímetros a pulgadas
+(define (centimetros-pulgadas centimetros)
+  (/ centimetros 2.54))
+
+; Función principal
+(define (main)
+(displayln "Ingresa la longitud:")
+(define longitud (read))
+(displayln "Selecciona la opción de conversión:")
+(displayln "1. Metros a yardas")
+(displayln "2. Metros a pies")
+(displayln "3. Metros a pulgadas")
+(displayln "4. Centímetros a yardas")
+(displayln "5. Centímetros a pies")
+(displayln "6. Centímetros a pulgadas")
+(define opcion (read))
+(cond ((= opcion 1) (displayln (metros-yardas longitud)))
+((= opcion 2) (displayln (metros-pies longitud)))
+((= opcion 3) (displayln (metros-pulgadas longitud)))
+((= opcion 4) (displayln (centimetros-yardas longitud)))
+((= opcion 5) (displayln (centimetros-pies longitud)))
+((= opcion 6) (displayln (centimetros-pulgadas longitud)))
+(else (displayln "Opción inválida."))
+)
+)
