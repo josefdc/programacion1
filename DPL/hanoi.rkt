@@ -27,7 +27,7 @@
 (main)
 
 
-; Inicialmente, todos los discos están en la varilla A y queremos moverlos a la varilla C utilizando la varilla B como auxiliar. Aquí está la secuencia de pasos:
+; Inicialmente, todos #1 los discos están en la varilla A y queremos moverlos a la varilla C utilizando la varilla B como auxiliar. Aquí está la secuencia de pasos:
 
 ;     Llamamos a la función hanoi con n = 3, origen = A, auxiliar = B y destino = C.
 
