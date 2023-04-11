@@ -1,4 +1,4 @@
-# progrmacion1
+# programacion1
 IS105 Programacion I Gr. 3
 
    Luis Eduardo Muñoz Guerrero - lemunozg@utp.edu.co
