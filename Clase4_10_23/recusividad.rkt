@@ -54,5 +54,76 @@
 ; miremos algunos casos
 (numeros2 5 1)
 
+;----3------
+; una funcion que muestre los numero de n hasta m
 
- 
+; Ejemplo 
+
+; n = 10
+; m = 5
+
+; 10 9 8 7 6 5
+
+; Ejemplo 2
+
+; n = 4
+
+; m = 10
+
+; 4 5 6 7 8 9 10.
+
+;definimos la funcion   
+
+(define (numeros3 n m)
+  (cond [(> n m) (begin 
+                   (display n) 
+                   (newline) 
+                   (numeros3 (- n 1) m))]
+        [(< n m) (begin                 
+                   (display n)   
+                   (newline)
+                   (numeros3 (+ n 1) m))]
+        [else (display n) (newline)]))
+
+(numeros3 10 5) ; muestra 10 9 8 7 6 5 en consola
+(numeros3 4 10) ; muestra 4 5 6 7 8 9 10 en consola
+(numeros3 5 5) ; muestra 5 en consola
+
+; otra manera de solucionarlo.
+
+ (define (numero n m)
+  (cond
+    ((< n m)(begin
+              (displayln n)
+              (numero (+ n 1)m)
+              m
+              )
+            )
+    (else
+     n)
+    )
+  )
+
+(define (numero2 n m)
+  (cond
+    ((> n m)(begin
+              (displayln n)
+              (numero2 (- n 1)m)
+              m
+              )
+            )
+    
+  (else
+   (display n)
+   )
+  )
+  )
+
+(define (num3 n m)
+  (if (< n m)
+      (numero n m)
+
+      (numero2 n m)
+      )
+  )
+(num3 10 3)
