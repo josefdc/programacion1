@@ -47,6 +47,55 @@
 
 (main)
 
+; solucion alternativa con menos funciones auxiliares
+#lang racket
+
+(define (imprimir-rango numero)
+  (cond
+    [(<= numero 15) (imprimir-numeros 1 15)]
+    [(<= numero 30) (imprimir-numeros 15 30)]
+    [(<= numero 40) (imprimir-numeros 30 40)]
+    [else (display "El numero no esta en el rango")])
+  )
+
+(define (imprimir-numeros inicio fin)
+  (if (<= inicio fin)
+      (begin
+        (display inicio)
+        (display " ")
+        (imprimir-numeros (+ inicio 1) fin))
+      (display " ")))
+
+(define (main)
+  (display "Ingrese un numero: ")
+  (define numero (read))
+  (imprimir-rango numero))
+
+(main)
+;; otro tipo de funcion
+#lang racket
+
+(define (imprimir-rango numero inicio fin)
+  (if (<= inicio fin)
+      (begin
+        (display inicio)
+        (display " ")
+        (imprimir-rango numero (+ inicio 1) fin))
+      (display " ")))
+
+(define (main)
+  (display "Ingrese un numero: ")
+  (define numero (read))
+  (cond
+    [(<= numero 15) (imprimir-rango numero 1 15)]
+    [(<= numero 30) (imprimir-rango numero 15 30)]
+    [(<= numero 40) (imprimir-rango numero 30 40)]
+    [else (display "El numero no esta en el rango")]))
+
+(main)
 
 
-    
+;; problema 2
+; Hacer un programa que calcule la suma de dos numero que existen
+; Entre dos numeros dados, debe incluir ambos enteros
+; Ejemplo, si entran 3 y 8 ls funcion debe devover la suma total de 3+4+5+6+7+8
