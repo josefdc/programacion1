@@ -99,3 +99,25 @@
 ; Hacer un programa que calcule la suma de dos numero que existen
 ; Entre dos numeros dados, debe incluir ambos enteros
 ; Ejemplo, si entran 3 y 8 ls funcion debe devover la suma total de 3+4+5+6+7+8
+
+#lang racket
+
+(define (suma-numeros numero1 numero2)
+  (if (<= numero1 numero2)
+      (begin
+        (display numero1)
+        (display " ")
+        (+ numero1 (suma-numeros (+ numero1 1) numero2)))
+      (display " ")))
+
+(define (main)
+    (display "Ingrese un numero: ")
+    (define numero1 (read))
+    (display "Ingrese un numero: ")
+    (define numero2 (read))
+    (display "La suma es: ")
+    (display (suma-numeros numero1 numero2)))
+
+(main)
+
+;; problema 3
