@@ -293,5 +293,11 @@
 
 (main)
 
+;problema 15
+;Lanzamiento de dos dados n veces, determinar el numero determinar cuatas veces salen pares
+
+#lang racket
+
+
 
 
