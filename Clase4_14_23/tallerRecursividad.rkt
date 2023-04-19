@@ -316,6 +316,14 @@
   (display pares)
   (newline))
 
+; Funcion auxiliar que muetre el numero del dado 1 y el numero del dado 2
+(define (display-dados n1 n2)
+  (display "Dado 1: ")
+  (display n1)
+  (display ", Dado 2: ")
+  (display n2)
+  (newline))
+
 ; Función principal que pide al usuario el número de lanzamientos y muestra el resultado
 (define (main)
   (display "Ingrese el número de lanzamientos de dados: ")
