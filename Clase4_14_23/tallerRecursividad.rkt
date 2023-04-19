@@ -297,7 +297,31 @@
 ;Lanzamiento de dos dados n veces, determinar el numero determinar cuatas veces salen pares
 
 #lang racket
+; Función auxiliar que simula un lanzamiento de dado y devuelve un número aleatorio entre 1 y 6
+(define (lanzar-dado)
+  (+ 1 (random 6)))
+
+; Función auxiliar que lanza dos dados n veces y cuenta el número de pares de forma recursiva
+(define (lanzar-dados-n veces pares)
+  (if (= veces 0)
+      (display-result pares)
+      (if (= (modulo (+ (lanzar-dado) (lanzar-dado)) 2) 0)
+          (lanzar-dados-n (- veces 1) (+ pares 1))
+          (lanzar-dados-n (- veces 1) pares))))
 
 
+; Función auxiliar para mostrar el resultado
+(define (display-result pares)
+  (display "Pares: ")
+  (display pares)
+  (newline))
+
+; Función principal que pide al usuario el número de lanzamientos y muestra el resultado
+(define (main)
+  (display "Ingrese el número de lanzamientos de dados: ")
+  (define n (read))
+  (lanzar-dados-n n 0))
+
+(main)
 
 
