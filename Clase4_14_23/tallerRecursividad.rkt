@@ -229,25 +229,35 @@
 
 #lang racket
 
+; Función principal para iniciar el juego de adivinar un número con 'n' intentos.
+; Llama a la función auxiliar 'adivinar-numero-aux' con el número de intentos y un número aleatorio entre 0 y 99.
 (define (adivinar-numero n)
   (adivinar-numero-aux n (random 100)))
 
+; Función auxiliar para manejar los intentos de adivinar el número.
+; 'n' es el número de intentos restantes y 'm' es el número que se debe adivinar.
 (define (adivinar-numero-aux n m)
-  (if (<= n 0)
-      (display "Perdiste")
-      (begin
+  (if (<= n 0) ; Si no quedan intentos
+      (display "Perdiste") ; Muestra el mensaje de que se ha perdido
+      (begin ; Si aún quedan intentos
         (display "Adivina el numero: ")
-        (define a (read))
-        (if (= a m)
-            (display "Ganaste")
-            (begin
-              (display "Te quedan ")
-              (display (- n 1))
-              (display " oportunidades")
-              (newline)
-              (adivinar-numero-aux (- n 1) m))))))
-; Llama a la funcion
+        (adivinar-numero-aux-2 n m (read))))) ; Llama a la función auxiliar 'adivinar-numero-aux-2' con el valor leído
+
+; Función auxiliar para comparar el número adivinado 'a' con el número objetivo 'm'.
+; 'n' es el número de intentos restantes.
+(define (adivinar-numero-aux-2 n m a)
+  (if (= a m) ; Si el número adivinado es igual al número objetivo
+      (display "Ganaste") ; Muestra el mensaje de que se ha ganado
+      (begin ; Si el número adivinado no es igual al número objetivo
+        (display "Te quedan ")
+        (display (- n 1))
+        (display " oportunidades")
+        (newline)
+        (adivinar-numero-aux (- n 1) m)))) ; Llama a 'adivinar-numero-aux' con un intento menos
+
+; Llama a la función principal para iniciar el juego
 (adivinar-numero 5)
+
 
 
 
