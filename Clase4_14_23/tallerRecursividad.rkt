@@ -329,7 +329,6 @@
   (display "Ingrese el número de lanzamientos de dados: ")
   (define n (read))
   (lanzar-dados-n n 0))
+  (display-dados n1 n2)
 
 (main)
-
-

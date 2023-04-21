@@ -87,21 +87,53 @@
 ; pruebas de escritorio
 (division 12 3)
 
-
 ; ---6---
 ; raiz cuadrado con metodo de Heron
 
 ; Función auxiliar que implementa el método de Herón
 (define (heron-method x y)
-  (define epsilon 0.0001) ; Valor de tolerancia para detener las iteraciones
+  ; Valor de tolerancia para detener las iteraciones
+  (define epsilon 0.0001) 
+
+  ; Verificar si la diferencia entre el cuadrado de y y x es menor que la tolerancia
   (if (< (abs (- (sqr y) x)) epsilon)
+      ; Si la diferencia es menor que la tolerancia, entonces se ha encontrado una aproximación suficientemente buena
       y
+      ; Si la diferencia es mayor que la tolerancia, entonces continuar iterando
       (heron-method x (/ (+ y (/ x y)) 2))))
 
 ; Función principal para calcular la raíz cuadrada
 (define (sqrt-recursive x)
+  ; Invocar heron-method con una aproximación inicial igual al número de entrada
   (heron-method x x))
 
 ; Ejemplo de uso
 (define numero (read))
-(printf "La raíz cuadrada aproximada de ~a es: ~a" numero (sqrt-recursive numero))
+; Imprimir la raíz cuadrada aproximada del número leído
+(display "La raíz cuadrada aproximada de ")
+(display numero)
+(display " es: ")
+(display (sqrt-recursive numero))
+(newline)
+
+;---7---
+;resta de manera recursiva
+
+(define (resta n m)
+  (if (= 0 m) n
+      (begin 
+        (resta (- n 1) (- m 1)))))
+
+(resta (read) (read))
+
+; pruebas de escritorio
+
+(resta 5 3)
+(- 1 (resta 5 2))
+(- 1 (- 1 (resta 5 1)))
+(- 1 (- 1 (- 1 (resta 5 0))))
+(- 1 (- 1 (- 1 5)))
+(- 1 (- 1 4))
+(- 1 3)
+2
+
