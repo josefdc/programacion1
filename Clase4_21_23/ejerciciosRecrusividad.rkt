@@ -24,51 +24,47 @@
 ;----2----
 ;potencia de n (validar base y exponente, que sean entero positivo y base (par) y exp (impar))
 
-; Validar si n es entero positivo
-(define (validar n)
-  (if (and (integer? n) (> n 0))
-      n
-      (begin
-        (display "Ingrese un numero entero positivo")
-        (newline)
-        (main))))
+#lang racket
 
-; Validar base (par) y exponente (impar)
-(define (validar2 b a)
-  (cond [(and (even? b) (odd? a))
-         (expt b a)]
-        [(not (even? b))
-         (begin
-           (display "Ingrese una base par")
-           (newline)
-           (main))]
-        [(not (odd? a))
-         (begin
-           (display "Ingrese un exponente impar")
-           (newline)
-           (main))]
-        [else
-         (begin
-           (display "Ingrese una base par y un exponente impar")
-           (newline)
-           (main))]))
+; Potencia de un numero
+(define (potencia n e)
+  (if (= e 0)
+      1
+      (* n (potencia n (- e 1)))))
 
-; Hacemos la función principal que pida la base y el exponente
+; Validar base (par) y exponente (impar) y que sean enteros positivos
+(define (validar a b)
+  (cond
+    [(and (even? a) (odd? b) (> a 0) (> b 0)) (potencia a b)]
+    [(<= a 0) "Invalido porque la base no es un entero positivo"]
+    [(<= b 0) "Invalido porque el exponente no es un entero positivo"]
+    [(even? a) "Invalido porque el exponente es par"]
+    [(odd? b) "Invalido porque la base es impar"]
+    [else "Invalido porque la base es impar y el exponente es par"]))
+
+; Función principal que pide la base y el exponente
 (define (main)
   (display "Ingrese la base: ")
   (newline)
-  (define b (read))
+  (define a (read))
   (display "Ingrese el exponente: ")
   (newline)
-  (define a (read))
+  (define b (read))
   (newline)
-  (validar2 (validar b) (validar a)))
+  (display (validar a b))
+  (newline))
 
 ; Ejecutar la función principal
 (main)
 
+
+
 ;----3----
 ; suma de dos numeros (enteros positivos y pares) 
+
+#lang racket
+
+; Suma de dos numeros (enteros positivos y pares)
 
 ; Validar si n es entero positivo y par
 (define (validar n)
@@ -79,6 +75,12 @@
         (newline)
         (main))))
 
+; Suma de dos numeros utilizando recursión
+(define (suma n m)
+  (if (= m 0)
+      n
+      (suma (+ n 1) (- m 1))))
+
 ; Hacemos la función principal que pida los dos números
 (define (main)
   (display "Ingrese el primer numero: ")
@@ -88,14 +90,16 @@
   (newline)
   (define m (read))
   (newline)
-  (display (+ (validar n) (validar m)))
+  (display (suma (validar n) (validar m)))
   (newline))
-
 
 ; Ejecutar la función principal
 (main)
 
-; multiplicacion de dos numeros (enteros positivos e impares)
+;----4----
+
+
+; Multiplicacion de dos numeros (enteros positivos e impares)
 
 ; Validar si n es entero positivo e impar
 (define (validar n)
@@ -106,6 +110,12 @@
         (newline)
         (main))))
 
+; Multiplicacion de dos numeros utilizando recursión
+(define (multiplicacion n m)
+  (if (= m 0)
+      0
+      (+ n (multiplicacion n (- m 1)))))
+
 ; Hacemos la función principal que pida los dos números
 (define (main)
   (display "Ingrese el primer numero: ")
@@ -115,10 +125,10 @@
   (newline)
   (define m (read))
   (newline)
-  (display (* (validar n) (validar m)))
+  (display (multiplicacion (validar n) (validar m)))
   (newline))
 
-; llamamos a la funcion principal
+; Ejecutar la función principal
 (main)
 
 ;----5----
@@ -154,43 +164,43 @@
 ; Ejecutar el juego
 (main)
 
-;----6----
-; Adivianr un numero en maximo 3 oportunidades
+  ;----6----
+  ; Adivianr un numero en maximo 3 oportunidades
 
-; Generar un número aleatorio entre 1 y 10
-(define (generar-numero-aleatorio)
-  (+ 1 (random 10)))
+  ; Generar un número aleatorio entre 1 y 10
+  (define (generar-numero-aleatorio)
+    (+ 1 (random 10)))
 
-; Jugar el juego y contar oportunidades
-(define (adivinar-numero numero intentos)
-  (display "Adivina el número entre 1 y 10: ")
-  (newline)
-  (define guess (read))
-  (if (= guess numero)
-      (begin
-        (display "¡Correcto! El número era ")
-        (display numero)
-        (display ". Adivinaste en ")
-        (display intentos)
-        (display " intentos.")
-        (newline))
-      (begin
-        (display "Incorrecto, intenta de nuevo.")
-        (newline)
-        (if (< intentos 3)
-            (adivinar-numero numero (+ intentos 1))
-            (begin
-              (display "¡Perdiste! El número era ")
-              (display numero)
-              (display ".")
-              (newline))))))
-; Función principal para iniciar el juego
-(define (main)
-  (define numero-aleatorio (generar-numero-aleatorio))
-  (adivinar-numero numero-aleatorio 1))
+  ; Jugar el juego y contar oportunidades
+  (define (adivinar-numero numero intentos)
+    (display "Adivina el número entre 1 y 10: ")
+    (newline)
+    (define guess (read))
+    (if (= guess numero)
+        (begin
+          (display "¡Correcto! El número era ")
+          (display numero)
+          (display ". Adivinaste en ")
+          (display intentos)
+          (display " intentos.")
+          (newline))
+        (begin
+          (display "Incorrecto, intenta de nuevo.")
+          (newline)
+          (if (< intentos 3)
+              (adivinar-numero numero (+ intentos 1))
+              (begin
+                (display "¡Perdiste! El número era ")
+                (display numero)
+                (display ".")
+                (newline))))))
+  ; Función principal para iniciar el juego
+  (define (main)
+    (define numero-aleatorio (generar-numero-aleatorio))
+    (adivinar-numero numero-aleatorio 1))
 
-; Ejecutar el juego
-(main)
+  ; Ejecutar el juego
+  (main)
 
 
 
