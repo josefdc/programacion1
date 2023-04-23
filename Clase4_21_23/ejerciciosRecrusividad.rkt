@@ -60,10 +60,6 @@
 
 
 ;----3----
-; suma de dos numeros (enteros positivos y pares) 
-
-#lang racket
-
 ; Suma de dos numeros (enteros positivos y pares)
 
 ; Validar si n es entero positivo y par
@@ -132,38 +128,47 @@
 (main)
 
 ;----5----
-; adivinar un numero de 1-10 y contar el numero de oportunidades
+#lang racket
 
-; Generar un número aleatorio entre 1 y 10
+
+;; Funciones auxiliares
 (define (generar-numero-aleatorio)
   (+ 1 (random 10)))
 
-; Jugar el juego y contar oportunidades
-(define (adivinar-numero numero intentos)
+(define (leer-intento)
   (display "Adivina el número entre 1 y 10: ")
   (newline)
-  (define guess (read))
-  (if (= guess numero)
-      (begin
-        (display "¡Correcto! El número era ")
-        (display numero)
-        (display ". Adivinaste en ")
-        (display intentos)
-        (display " intentos.")
-        (newline))
-      (begin
-        (display "Incorrecto, intenta de nuevo.")
-        (newline)
-        (adivinar-numero numero (+ intentos 1)))))
+  (read))
 
-; Función principal para iniciar el juego
+(define (mostrar-mensaje-correcto numero intentos)
+  (display "¡Correcto! El número era ")
+  (display numero)
+  (display ". Adivinaste en ")
+  (display intentos)
+  (display " intentos.")
+  (newline))
+
+(define (mostrar-mensaje-incorrecto)
+  (display "Incorrecto, intenta de nuevo.")
+  (newline))
+
+;; Función para jugar el juego y contar oportunidades
+(define (adivinar-numero numero intentos)
+  (define guess (leer-intento))
+  (cond
+    [(= guess numero)
+     (mostrar-mensaje-correcto numero intentos)]
+    [else
+     (mostrar-mensaje-incorrecto)
+     (adivinar-numero numero (+ intentos 1))]))
+
+;; Función principal para iniciar el juego
 (define (main)
   (define numero-aleatorio (generar-numero-aleatorio))
   (adivinar-numero numero-aleatorio 1))
 
-; Ejecutar el juego
+;; Ejecutar el juego
 (main)
-
   ;----6----
   ; Adivianr un numero en maximo 3 oportunidades
 
