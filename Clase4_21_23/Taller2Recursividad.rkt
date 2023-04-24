@@ -122,7 +122,7 @@
 (define (doble-o-nada)
     (define (jugar apuesta)
         (define (tirarMoneda)
-            (random 2))
+       2     (random 2))
         (cond [(= (tirarMoneda) 0) (+ apuesta (jugar apuesta))]
                 [else (- apuesta (jugar apuesta))]))
     (jugar 1))
