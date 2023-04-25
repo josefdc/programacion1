@@ -126,3 +126,125 @@
 
 ; Llama a la función 'figura' con los valores iniciales de i y j establecidos en 1 y k siendo el valor ingresado por el usuario.
 (figura 1 1 (read))
+
+;-----------------------------------------------------------------------------
+; Define una función llamada 'imp' que toma tres argumentos: i, t y cad.
+(define (imp i t cad)
+  ; Si el valor de i es menor o igual que t, entonces ejecuta el siguiente bloque de código.
+  (if (<= i t)
+      (begin
+        ; Muestra la cadena 'cad' en la pantalla sin un salto de línea.
+        (display cad)
+        ; Llama a la función 'imp' nuevamente con i incrementado en 1, y los valores de t y cad sin cambios.
+        (imp (+ i 1) t cad))))
+
+; Define una función llamada 'm' que toma un argumento: ciclos.
+(define (m ciclos)
+  ; Si el valor de ciclos es mayor o igual que 0, entonces ejecuta el siguiente bloque de código.
+  (if (>= ciclos 0)
+      (begin
+        ; Llama a la función 'imp' con los valores iniciales de i establecido en 1, t calculado como (5 - ciclos * 2) y cad establecido en "*".
+        (imp 1 (- 5 (* ciclos 2)) "*")
+        ; Crea un salto de línea en la pantalla.
+        (newline)
+        ; Llama a la función 'm' nuevamente con ciclos decrementado en 1.
+        (m (- ciclos 1))
+        ; Llama a la función 'imp' nuevamente con los mismos valores que antes, pero esta vez cad está establecido en "+".
+        (imp 1 (- 5 (* ciclos 2)) "+")
+        ; Crea un salto de línea en la pantalla.
+        (newline))))
+
+; Llama a la función 'm' con el valor inicial de ciclos establecido en 2.
+(m 2)
+
+;-----------------------------------------------------------------------------
+; Define una función llamada 'imp' que toma tres argumentos: i, t y cad.
+(define (imp i t cad)
+  ; Si el valor de i es menor o igual que t, entonces ejecuta el siguiente bloque de código.
+  (if (<= i t)
+      (begin
+        ; Muestra la cadena 'cad' en la pantalla sin un salto de línea.
+        (display cad)
+        ; Llama a la función 'imp' nuevamente con i incrementado en 1, y los valores de t y cad sin cambios.
+        (imp (+ i 1) t cad))))
+
+; Define una función llamada 'm' que toma un argumento: ciclos.
+(define (m ciclos)
+  ; Si el valor de ciclos es mayor o igual que 0, entonces ejecuta el siguiente bloque de código.
+  (if (>= ciclos 0)
+      (begin
+        ; Llama a la función 'imp' con los valores iniciales de i establecido en 1, t igual a (ciclos + 2) y cad establecido en "*".
+        (imp 1 (+ ciclos 2) "*")
+        ; Crea un salto de línea en la pantalla.
+        (newline)
+        ; Llama a la función 'm' nuevamente con ciclos decrementado en 1.
+        (m (- ciclos 1))
+        ; Llama a la función 'imp' nuevamente con los mismos valores que antes, pero esta vez cad está establecido en "+".
+        (imp 1 (+ ciclos 2) "+")
+        ; Crea un salto de línea en la pantalla.
+        (newline))))
+
+; Llama a la función 'm' con el valor inicial de ciclos establecido en 3.
+(m 3)
+
+;-----------------------------------------------------------------------------
+
+
+(define (imprime-espacios n)
+  (if (> n 0)
+      (begin
+        (display " ")
+        (imprime-espacios (- n 1)))))
+
+(define (imprime-asteriscos n)
+  (if (> n 0)
+      (begin
+        (display "*")
+        (imprime-asteriscos (- n 1)))))
+
+(define (imprime-patron n i)
+  (if (<= i n)
+      (begin
+        (imprime-espacios (- n i))
+        (imprime-asteriscos i)
+        (newline)
+        (imprime-patron n (+ i 1)))))
+
+(imprime-patron 4 1)
+
+;----------------------------------------------------------------------------------------------------
+
+(define (imprime-espacios n)
+  (if (> n 0)
+      (begin
+        (display " ")
+        (imprime-espacios (- n 1)))))
+
+(define (imprime-asteriscos n)
+  (if (> n 0)
+      (begin
+        (display "*")
+        (imprime-asteriscos (- n 1)))))
+
+(define (imprime-patron-ascendente n i)
+  (if (<= i n)
+      (begin
+        (imprime-espacios (- n i))
+        (imprime-asteriscos i)
+        (newline)
+        (imprime-patron-ascendente n (+ i 1)))))
+
+(define (imprime-patron-descendente n i)
+  (if (<= i n)
+      (begin
+        (imprime-espacios i)
+        (imprime-asteriscos (- n i))
+        (newline)
+        (imprime-patron-descendente n (+ i 1)))))
+
+(define (imprime-patron-completo n)
+  (imprime-patron-ascendente n 1)
+  (imprime-patron-descendente n 1))
+
+(imprime-patron-completo 3)
+
