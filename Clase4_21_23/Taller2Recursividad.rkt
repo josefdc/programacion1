@@ -169,22 +169,12 @@
                 (display numero)
                 (newline)
                 (display "Total de intentos: ")
-                (display intentos)
-                (newline)
-                )
-            (begin
-                (display "Adivina el numero: ")
-                (define numeroAdivinado (read))
-                (if (= numero numeroAdivinado)
-                    (begin
-                        (display "Ganaste :)\n")
-                        (display "Total de intentos: ")
-                        (display intentos)
-                        (newline)
-                        )
-                    (begin
-                        (display "Fallaste :(\n")
-                        (adivinar numero (- intentos 1))
+                (displ0. Escribir un programa que sume las cifras de un número
+; entero positivo.
+; Ej.
+; 962 9 + 6 + 2 = 17
+; 1 + 7 = 8
+; El resultado es 8(adivinar numero (- intentos 1))
                         )
                     )
                 )
