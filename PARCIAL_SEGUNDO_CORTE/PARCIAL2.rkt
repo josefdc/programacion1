@@ -247,7 +247,32 @@
 
 
 
+#lang racket
 
+(define (print-spaces n)
+  (cond
+    [(<= n 0) (newline)]
+    [else
+     (display " ")
+     (print-spaces (- n 1))]))
+
+(define (print-triangles n)
+  (cond
+    [(<= n 0) (newline)]
+    [else
+     (display "*")
+     (print-spaces (- n 1))
+     (display "*")
+     (print-triangles (- n 1))]))
+
+(define (sierpinski-aux n row col)
+  (cond
+    [(= n 0) (display "*")]
+    [(= (modulo (+ row col) 2) 0) (sierpinski-aux (- n 1) (/ row 2) (/ col 2))]
+    [else (display " ")]))
+
+(define (print-row n row)
+  (cond
 
 
 ;--------------------------------------------------------------------------
@@ -541,11 +566,56 @@
 
 ; Ejericio 12
 ; Realizar un código que cumpla la función de una división mediante restas sucesivas en racket.
+; Función auxiliar para realizar la división mediante restas sucesivas
+(define (division-aux dividend divisor contador)
+  (if (< dividend divisor)
+      contador
+      (division-aux (- dividend divisor) divisor (+ contador 1))))
 
+; Función principal de la división mediante restas sucesivas
+(define (division dividend divisor)
+  (if (= divisor 0)
+      (error "La división por cero no está definida")
+      (division-aux dividend divisor 0)))
+
+; Función para ejecutar el programa
+(define (main)
+  (display "Ingrese el dividendo: ")
+  (define dividend (read))
+  (display "Ingrese el divisor: ")
+  (define divisor (read))
+  (define resultado (division dividend divisor))
+  (display "El resultado de la división es: ")
+  (display resultado)
+  (newline))
+
+; Ejecutar el programa
+(main)
 ; ; Ejercicio 13
 ; Encuentra todas las combinaciones posibles de palabras formadas desde el teclado del móvilDada una secuencia de números entre 2
 ; y 9, imprime todas las combinaciones posibles de palabras formadas desde el teclado del móvil que tiene alfabetos en inglés
 ; asociados a cada tecla
 
+
 ;Ejercicio 14
 ;Programe un método recursivo que transforme un número entero positivo a notación binaria
+
+#lang racket
+
+(define (entero-a-binario n)
+  (if (= n 0)
+      0
+      (+ (modulo n 2)
+         (* 10 (entero-a-binario (quotient n 2))))))
+
+(define (main)
+  (display "Ingrese un número entero positivo: ")
+  (define n (read))
+  (if (< n 0)
+      (display "El número debe ser positivo.")
+      (begin
+        (display "La representación binaria del número es: ")
+        (display (entero-a-binario n))
+        (newline))))
+
+(main)
