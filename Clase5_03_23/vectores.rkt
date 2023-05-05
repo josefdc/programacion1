@@ -123,7 +123,33 @@ vec2 ;-> #(#876 "1" 1 "amigos") ; Se muestra el vector vec2 con el nuevo dato en
 ;; Tarea:
 
 ;; Llenar un vector de N hasta M y mostrarlo
-;; Contar wl numero de pares e impares de un vector
+;; Problema 1
+
+(define (vect n m) 
+  (if (and (integer? n)(integer? m)) ; Verifica si los parámetros
+  (llenar n m (make-vector (+(- m n)1))0) ; Llama a la función llenar para ingresar los datos en el vector
+  "Error: Los parametros deben ser enteros"))
+
+
+
+(define (llenar n m vec pos)
+  (if (and (<= n m)(<= pos (vector-length vec)))
+      (begin
+        (vector-set! vec pos n)
+        (llenar (+ n 1) m vec (+ pos 1))
+        )
+      (display vec)
+      )
+  )
+
+(vect (read) (read)) 
+
+;; Contar el numero de pares e impares de un vector
+(define (contar vec cp ci pos)
+ (if (= pos (vector-length vec))
+ (begin)
+ ) 
+ )
 ;; Colocar en dos vectores los numeros para y los impares
 ;; Contar el numeros de primos de un vector
 ;; llenar en un vector la serie de fibonacci un vector
