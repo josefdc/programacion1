@@ -1,5 +1,5 @@
 
-# Programación 1 - Universidad Tecnológica de Colombia
+# Programación 1 - Universidad Tecnológica de Pereira
 IS105 Programacion I Gr. 3
 
    Luis Eduardo Muñoz Guerrero - lemunozg@utp.edu.co
@@ -22,4 +22,4 @@ Este repositorio contiene una variedad de recursos para ayudarte a entender y ap
 Invitamos a todos los miembros de la comunidad educativa a contribuir a este repositorio. Ya sea que quieras compartir tus propios proyectos, mejorar los materiales de estudio existentes o sugerir nuevos recursos, tu contribución es bienvenida.
 Licencia
 
-Este proyecto es de código abierto y está disponible bajo la licencia [INSERTAR LICENCIA]. Por favor, asegúrate de entender sus términos antes de contribuir.
+Este proyecto es de código abierto. Por favor, asegúrate de entender sus términos antes de contribuir.
